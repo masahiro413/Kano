@@ -1,0 +1,21 @@
+{
+  "current": "Default",
+  "presets": {
+    "Default": {
+      "color_background": "#FBF7F3",
+      "color_section_background": "#F3EBE3",
+      "color_text": "#2E2A26",
+      "color_accent": "#A9765B",
+      "color_button_text": "#FFFFFF",
+      "color_border": "#E4D9CD",
+      "type_header_font": "alegreya_n4",
+      "type_body_font": "assistant_n4",
+      "page_width": 1400,
+      "social_instagram_link": "",
+      "social_facebook_link": "",
+      "social_line_link": "",
+      "show_shipping_note": true,
+      "shipping_note": "5,000円以上のご注文で送料無料"
+    }
+  }
+}

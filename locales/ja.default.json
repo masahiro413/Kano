@@ -1,0 +1,42 @@
+{
+  "general": {
+    "search": {
+      "placeholder": "商品を検索",
+      "submit": "検索"
+    },
+    "cart": {
+      "title": "カート",
+      "empty": "カートに商品がありません",
+      "continue_shopping": "買い物を続ける",
+      "view_cart": "カートを見る",
+      "checkout": "レジに進む",
+      "subtotal": "小計",
+      "quantity": "数量",
+      "remove": "削除",
+      "added": "カートに追加しました"
+    },
+    "menu": {
+      "open": "メニューを開く",
+      "close": "閉じる"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "カートに追加",
+      "sold_out": "売り切れ",
+      "unavailable": "販売不可",
+      "quantity": "数量",
+      "view_details": "詳細を見る"
+    }
+  },
+  "collections": {
+    "general": {
+      "no_products": "商品が見つかりませんでした"
+    }
+  },
+  "404": {
+    "title": "ページが見つかりません",
+    "subtext": "お探しのページは存在しないか、移動した可能性があります。",
+    "link": "トップページへ戻る"
+  }
+}

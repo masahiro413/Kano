@@ -1,0 +1,95 @@
+<header class="site-header">
+  <div class="container site-header__inner">
+    <details class="mobile-nav">
+      <summary class="mobile-nav__toggle" aria-label="{{ 'general.menu.open' | t }}">
+        <span></span><span></span><span></span>
+      </summary>
+      <nav class="mobile-nav__panel">
+        <ul>
+          {% for link in linklists[section.settings.menu].links %}
+            <li>
+              <a href="{{ link.url }}">{{ link.title }}</a>
+              {% if link.links != blank %}
+                <ul>
+                  {% for child_link in link.links %}
+                    <li><a href="{{ child_link.url }}">{{ child_link.title }}</a></li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </details>
+
+    <a href="{{ routes.root_url }}" class="site-header__logo">
+      {% if section.settings.logo %}
+        <img
+          src="{{ section.settings.logo | image_url: width: 320 }}"
+          alt="{{ shop.name }}"
+          width="{{ section.settings.logo_width }}"
+          height="auto"
+          loading="eager"
+        >
+      {% else %}
+        <span class="site-header__logo-text">{{ shop.name }}</span>
+      {% endif %}
+    </a>
+
+    <nav class="site-header__nav">
+      <ul>
+        {% for link in linklists[section.settings.menu].links %}
+          <li class="site-header__nav-item">
+            <a href="{{ link.url }}">{{ link.title }}</a>
+            {% if link.links != blank %}
+              <ul class="site-header__submenu">
+                {% for child_link in link.links %}
+                  <li><a href="{{ child_link.url }}">{{ child_link.title }}</a></li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+    <div class="site-header__actions">
+      <a href="{{ routes.search_url }}" class="site-header__icon-link" aria-label="{{ 'general.search.submit' | t }}">
+        {% render 'icon', name: 'search' %}
+      </a>
+      <a href="{{ routes.cart_url }}" class="site-header__icon-link site-header__cart" aria-label="{{ 'general.cart.title' | t }}">
+        {% render 'icon', name: 'cart' %}
+        <span class="site-header__cart-count" data-cart-count>{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "ヘッダー",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "ロゴ画像"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "ロゴの幅",
+      "min": 60,
+      "max": 260,
+      "step": 10,
+      "unit": "px",
+      "default": 140
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "メインメニュー",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

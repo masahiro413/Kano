@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>
+    {{ page_title }}{% if page_title != shop.name %} | {{ shop.name }}{% endif %}
+  </title>
+  {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+
+  <link rel="canonical" href="{{ canonical_url }}">
+  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+  {{ content_for_header }}
+
+  <style>
+    {{ settings.type_header_font | font_face: font_display: 'swap' }}
+    {{ settings.type_body_font | font_face: font_display: 'swap' }}
+  </style>
+
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+
+  <style>
+    :root {
+      --color-background: {{ settings.color_background }};
+      --color-section-background: {{ settings.color_section_background }};
+      --color-text: {{ settings.color_text }};
+      --color-accent: {{ settings.color_accent }};
+      --color-button-text: {{ settings.color_button_text }};
+      --color-border: {{ settings.color_border }};
+      --font-header-family: {{ settings.type_header_font.family }}, serif;
+      --font-header-style: {{ settings.type_header_font.style }};
+      --font-body-family: {{ settings.type_body_font.family }}, sans-serif;
+      --font-body-style: {{ settings.type_body_font.style }};
+      --page-width: {{ settings.page_width }}px;
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-to-content" href="#main-content">メインコンテンツへスキップ</a>
+
+  {% section 'header' %}
+
+  <main id="main-content">
+    {{ content_for_layout }}
+  </main>
+
+  {% section 'footer' %}
+
+  {{ 'global.js' | asset_url | script_tag }}
+</body>
+</html>

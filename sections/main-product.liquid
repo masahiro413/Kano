@@ -1,0 +1,120 @@
+{% liquid
+  assign current_variant = product.selected_or_first_available_variant
+%}
+<section class="section main-product">
+  <div class="container main-product__inner">
+    <div class="main-product__gallery">
+      {% if product.featured_media %}
+        <img
+          class="main-product__main-image"
+          id="ProductMainImage"
+          src="{{ product.featured_media | image_url: width: 900 }}"
+          alt="{{ product.featured_media.alt | default: product.title | escape }}"
+          width="900"
+          height="900"
+        >
+      {% else %}
+        {{ 'product-1' | placeholder_svg_tag: 'main-product__placeholder' }}
+      {% endif %}
+
+      {% if product.media.size > 1 %}
+        <div class="main-product__thumbs">
+          {% for media in product.media %}
+            <button
+              type="button"
+              class="main-product__thumb{% if media.id == product.featured_media.id %} is-active{% endif %}"
+              data-image-url="{{ media | image_url: width: 900 }}"
+            >
+              <img src="{{ media | image_url: width: 160 }}" alt="{{ media.alt | escape }}" width="160" height="160" loading="lazy">
+            </button>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="main-product__info">
+      <h1 class="main-product__title">{{ product.title }}</h1>
+
+      <div class="main-product__price" data-product-price>
+        {% if current_variant.compare_at_price > current_variant.price %}
+          <span class="main-product__price--sale">{{ current_variant.price | money }}</span>
+          <span class="main-product__price--compare">{{ current_variant.compare_at_price | money }}</span>
+        {% else %}
+          <span>{{ current_variant.price | money }}</span>
+        {% endif %}
+      </div>
+
+      {% form 'product', product, class: 'main-product__form', data-product-form: '' %}
+        <input type="hidden" name="id" value="{{ current_variant.id }}" data-variant-id-input>
+
+        {% unless product.has_only_default_variant %}
+          {% for option in product.options_with_values %}
+            <div class="main-product__option">
+              <label class="main-product__option-label">{{ option.name }}</label>
+              <div class="main-product__option-values">
+                {% for value in option.values %}
+                  <label class="main-product__option-value">
+                    <input
+                      type="radio"
+                      name="option-{{ option.position }}"
+                      value="{{ value | escape }}"
+                      data-option-index="{{ option.position }}"
+                      {% if option.selected_value == value %}checked{% endif %}
+                    >
+                    <span>{{ value }}</span>
+                  </label>
+                {% endfor %}
+              </div>
+            </div>
+          {% endfor %}
+
+          <script type="application/json" data-product-variants>
+            {{ product.variants | json }}
+          </script>
+        {% endunless %}
+
+        <div class="main-product__quantity">
+          <label for="Quantity">{{ 'products.product.quantity' | t }}</label>
+          <div class="quantity-selector">
+            <button type="button" class="quantity-selector__button" data-quantity-decrease aria-label="{{ 'general.cart.remove' | t }}">
+              {% render 'icon', name: 'minus' %}
+            </button>
+            <input type="number" id="Quantity" name="quantity" value="1" min="1" inputmode="numeric">
+            <button type="button" class="quantity-selector__button" data-quantity-increase aria-label="追加">
+              {% render 'icon', name: 'plus' %}
+            </button>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          name="add"
+          class="button button--primary main-product__add-to-cart"
+          data-add-to-cart
+          {% unless current_variant.available %}disabled{% endunless %}
+        >
+          <span data-add-to-cart-text>
+            {% if current_variant.available %}
+              {{ 'products.product.add_to_cart' | t }}
+            {% else %}
+              {{ 'products.product.sold_out' | t }}
+            {% endif %}
+          </span>
+        </button>
+
+        <p class="main-product__added-message" data-cart-success hidden>{{ 'general.cart.added' | t }}</p>
+      {% endform %}
+
+      {% if product.description != blank %}
+        <div class="main-product__description">{{ product.description }}</div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "商品本体",
+  "settings": []
+}
+{% endschema %}

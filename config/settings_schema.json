@@ -1,0 +1,120 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Fleur Sereine",
+    "theme_version": "1.0.0",
+    "theme_author": "Kano",
+    "theme_documentation_url": "https://example.com/docs",
+    "theme_support_url": "https://example.com"
+  },
+  {
+    "name": "カラー",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "背景色",
+        "default": "#FBF7F3"
+      },
+      {
+        "type": "color",
+        "id": "color_section_background",
+        "label": "セクション背景色",
+        "default": "#F3EBE3"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "テキスト色",
+        "default": "#2E2A26"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "アクセントカラー",
+        "default": "#A9765B"
+      },
+      {
+        "type": "color",
+        "id": "color_button_text",
+        "label": "ボタン文字色",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_border",
+        "label": "境界線の色",
+        "default": "#E4D9CD"
+      }
+    ]
+  },
+  {
+    "name": "タイポグラフィ",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "type_header_font",
+        "label": "見出しフォント",
+        "default": "alegreya_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_body_font",
+        "label": "本文フォント",
+        "default": "assistant_n4"
+      }
+    ]
+  },
+  {
+    "name": "レイアウト",
+    "settings": [
+      {
+        "type": "range",
+        "id": "page_width",
+        "label": "ページ最大幅",
+        "min": 1000,
+        "max": 1600,
+        "step": 50,
+        "unit": "px",
+        "default": 1400
+      }
+    ]
+  },
+  {
+    "name": "ソーシャルメディア",
+    "settings": [
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook_link",
+        "label": "Facebook URL"
+      },
+      {
+        "type": "text",
+        "id": "social_line_link",
+        "label": "LINE URL"
+      }
+    ]
+  },
+  {
+    "name": "チェックアウト",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_shipping_note",
+        "label": "配送についての一言をカートに表示する",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "shipping_note",
+        "label": "配送メッセージ",
+        "default": "5,000円以上のご注文で送料無料"
+      }
+    ]
+  }
+]

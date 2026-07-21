@@ -1,0 +1,57 @@
+<section class="hero" style="background-image: url('{{ section.settings.image | image_url: width: 1800 }}');">
+  <div class="hero__overlay"></div>
+  <div class="container hero__content">
+    {% if section.settings.heading != blank %}
+      <h1 class="hero__heading">{{ section.settings.heading }}</h1>
+    {% endif %}
+    {% if section.settings.subheading != blank %}
+      <p class="hero__subheading">{{ section.settings.subheading }}</p>
+    {% endif %}
+    {% if section.settings.button_label != blank %}
+      <a href="{{ section.settings.button_link }}" class="button button--primary">
+        {{ section.settings.button_label }}
+      </a>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "ヒーローバナー",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "背景画像"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "見出し",
+      "default": "季節の花を、暮らしの中に"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "サブテキスト",
+      "default": "Fleur Sereine の一輪が、静かな時間をつくります"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "ボタン文字",
+      "default": "コレクションを見る"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "ボタンリンク"
+    }
+  ],
+  "presets": [
+    {
+      "name": "ヒーローバナー"
+    }
+  ]
+}
+{% endschema %}

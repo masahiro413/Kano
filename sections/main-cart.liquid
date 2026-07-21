@@ -1,0 +1,86 @@
+<section class="section main-cart">
+  <div class="container">
+    <h1 class="main-cart__title">{{ 'general.cart.title' | t }}</h1>
+
+    {% if cart.item_count > 0 %}
+      <form action="{{ routes.cart_url }}" method="post" novalidate>
+        <table class="cart-table">
+          <thead>
+            <tr>
+              <th>商品</th>
+              <th>単価</th>
+              <th>{{ 'general.cart.quantity' | t }}</th>
+              <th>小計</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in cart.items %}
+              <tr class="cart-table__row">
+                <td class="cart-table__product">
+                  <a href="{{ item.url }}" class="cart-table__image">
+                    {% if item.image %}
+                      <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.product.title }} displayed in shopping cart" width="200" height="200" loading="lazy">
+                    {% endif %}
+                  </a>
+                  <div>
+                    <a href="{{ item.url }}" class="cart-table__product-title">{{ item.product.title }}</a>
+                    {% unless item.variant.title == 'Default Title' %}
+                      <p class="cart-table__variant">{{ item.variant.title }}</p>
+                    {% endunless %}
+                  </div>
+                </td>
+                <td>{{ item.original_price | money }}</td>
+                <td>
+                  <input
+                    type="number"
+                    min="0"
+                    name="updates[]"
+                    value="{{ item.quantity }}"
+                    class="cart-table__quantity"
+                    data-cart-line="{{ forloop.index }}"
+                  >
+                </td>
+                <td>{{ item.final_line_price | money }}</td>
+                <td>
+                  <a href="{{ item.url_to_remove }}" class="cart-table__remove">{{ 'general.cart.remove' | t }}</a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+        <div class="main-cart__footer">
+          {% if settings.show_shipping_note and settings.shipping_note != blank %}
+            <p class="main-cart__shipping-note">{{ settings.shipping_note }}</p>
+          {% endif %}
+          <div class="main-cart__subtotal">
+            <span>{{ 'general.cart.subtotal' | t }}</span>
+            <span>{{ cart.total_price | money }}</span>
+          </div>
+          <div class="main-cart__actions">
+            <a href="{{ routes.all_products_collection_url }}" class="button button--secondary">
+              {{ 'general.cart.continue_shopping' | t }}
+            </a>
+            <button type="submit" name="update" class="button button--secondary">カートを更新</button>
+            <button type="submit" name="checkout" class="button button--primary">
+              {{ 'general.cart.checkout' | t }}
+            </button>
+          </div>
+        </div>
+      </form>
+    {% else %}
+      <p class="main-cart__empty">{{ 'general.cart.empty' | t }}</p>
+      <a href="{{ routes.all_products_collection_url }}" class="button button--primary">
+        {{ 'general.cart.continue_shopping' | t }}
+      </a>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "カート本体",
+  "settings": []
+}
+{% endschema %}

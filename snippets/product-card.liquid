@@ -1,0 +1,45 @@
+{% comment %}
+  Renders a product card.
+  Usage: {% render 'product-card', product: product %}
+{% endcomment %}
+<div class="product-card">
+  <a href="{{ product.url }}" class="product-card__media">
+    {% if product.featured_image %}
+      <img
+        src="{{ product.featured_image | image_url: width: 600 }}"
+        alt="{{ product.featured_image.alt | default: product.title | escape }}"
+        loading="lazy"
+        width="600"
+        height="{{ 600 | divided_by: product.featured_image.aspect_ratio | default: 600 }}"
+      >
+      {% if product.images[1] %}
+        <img
+          class="product-card__media-hover"
+          src="{{ product.images[1] | image_url: width: 600 }}"
+          alt=""
+          loading="lazy"
+          width="600"
+          height="{{ 600 | divided_by: product.images[1].aspect_ratio | default: 600 }}"
+        >
+      {% endif %}
+    {% else %}
+      {{ 'product-1' | placeholder_svg_tag: 'product-card__placeholder' }}
+    {% endif %}
+    {% if product.compare_at_price > product.price %}
+      <span class="product-card__badge">Product</span>
+    {% endif %}
+  </a>
+  <div class="product-card__info">
+    <h3 class="product-card__title">
+      <a href="{{ product.url }}">{{ product.title }}</a>
+    </h3>
+    <div class="product-card__price">
+      {% if product.compare_at_price > product.price %}
+        <span class="product-card__price--sale">{{ product.price | money }}</span>
+        <span class="product-card__price--compare">{{ product.compare_at_price | money }}</span>
+      {% else %}
+        <span>{{ product.price | money }}</span>
+      {% endif %}
+    </div>
+  </div>
+</div>

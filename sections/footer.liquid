@@ -1,0 +1,59 @@
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div class="site-footer__block">
+      <h2 class="site-footer__heading">{{ shop.name }}</h2>
+      {% if section.settings.description != blank %}
+        <div class="site-footer__description">{{ section.settings.description }}</div>
+      {% endif %}
+    </div>
+
+    <div class="site-footer__block">
+      <h3 class="site-footer__subheading">サイトについて</h3>
+      <ul>
+        {% for link in linklists[section.settings.menu].links %}
+          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="site-footer__block">
+      <h3 class="site-footer__subheading">フォローする</h3>
+      <ul class="site-footer__social">
+        {% if settings.social_instagram_link != blank %}
+          <li><a href="{{ settings.social_instagram_link }}" target="_blank" rel="noopener">Instagram</a></li>
+        {% endif %}
+        {% if settings.social_facebook_link != blank %}
+          <li><a href="{{ settings.social_facebook_link }}" target="_blank" rel="noopener">Facebook</a></li>
+        {% endif %}
+        {% if settings.social_line_link != blank %}
+          <li><a href="{{ settings.social_line_link }}" target="_blank" rel="noopener">LINE</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+
+  <div class="site-footer__bottom">
+    <div class="container">
+      <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}</span>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "フッター",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "ショップ紹介文"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "フッターメニュー",
+      "default": "footer"
+    }
+  ]
+}
+{% endschema %}
