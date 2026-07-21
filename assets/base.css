@@ -1,4 +1,4 @@
-/* Fleur Sereine theme styles */
+/* Universal DVD Classic theme styles */
 
 *, *::before, *::after { box-sizing: border-box; }
 
@@ -201,7 +201,7 @@ button { font-family: inherit; cursor: pointer; }
 }
 .hero__content {
   position: relative;
-  color: #fff;
+  color: #7ceab1;
   text-align: center;
   max-width: 640px;
   margin: 0 auto;
@@ -247,7 +247,7 @@ button { font-family: inherit; cursor: pointer; }
   top: 10px;
   left: 10px;
   background: var(--color-accent);
-  color: #fff;
+  color: #7ceab1;
   font-size: 11px;
   padding: 4px 10px;
   border-radius: 999px;
@@ -275,7 +275,7 @@ button { font-family: inherit; cursor: pointer; }
   padding: 8px 14px;
   border-radius: 6px;
 }
-.pagination__current { background: var(--color-accent); color: #fff; }
+.pagination__current { background: var(--color-accent); color: #7ceab1; }
 
 /* Product page */
 .main-product__inner {
@@ -323,7 +323,7 @@ button { font-family: inherit; cursor: pointer; }
 .main-product__option-value input:checked + span {
   border-color: var(--color-accent);
   background: var(--color-accent);
-  color: #fff;
+  color: #ffffff;
 }
 
 .main-product__quantity { margin-bottom: 20px; }
@@ -346,6 +346,7 @@ button { font-family: inherit; cursor: pointer; }
   background: none;
   text-align: center;
   font-size: 15px;
+  appearance: textfield;
   -moz-appearance: textfield;
 }
 .quantity-selector input::-webkit-outer-spin-button,
