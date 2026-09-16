@@ -1,0 +1,72 @@
+{
+  "common": {
+    "appName": "Kano",
+    "loading": "Đang tải...",
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "add": "Thêm",
+    "delete": "Xóa",
+    "complete": "Hoàn thành"
+  },
+  "auth": {
+    "login": "Đăng nhập",
+    "logout": "Đăng xuất",
+    "register": "Đăng ký",
+    "email": "Địa chỉ email",
+    "password": "Mật khẩu",
+    "loginError": "Email hoặc mật khẩu không chính xác",
+    "forgotPassword": "Quên mật khẩu?",
+    "forgotPasswordSubmit": "Gửi email đặt lại mật khẩu",
+    "resetEmailSent": "Đã gửi email đặt lại mật khẩu",
+    "backToLogin": "Quay lại đăng nhập"
+  },
+  "registration": {
+    "fullName": "Họ và tên",
+    "phoneNumber": "Số điện thoại",
+    "address": "Địa chỉ",
+    "course": "Khóa học",
+    "displayLanguage": "Ngôn ngữ hiển thị",
+    "submit": "Đăng ký",
+    "error": "Đăng ký không thành công. Vui lòng kiểm tra lại thông tin.",
+    "noCourses": "Hiện chưa có khóa học nào để chọn"
+  },
+  "pendingApproval": {
+    "title": "Đang chờ phê duyệt",
+    "message": "Vui lòng chờ giáo viên/quản trị viên phê duyệt. Sau khi được phê duyệt, bạn có thể sử dụng."
+  },
+  "placementTest": {
+    "title": "Bài kiểm tra xếp lớp",
+    "comingSoon": "Tính năng này đang được chuẩn bị. Vui lòng chờ trong giây lát."
+  },
+  "tasks": {
+    "title": "Quản lý công việc",
+    "newTaskPlaceholder": "Nhập công việc mới",
+    "priority": {
+      "high": "Cao",
+      "medium": "Trung bình",
+      "low": "Thấp"
+    }
+  },
+  "staff": {
+    "approvalQueue": {
+      "empty": "Không có học viên nào đang chờ phê duyệt",
+      "approve": "Phê duyệt",
+      "reject": "Từ chối"
+    },
+    "createAccount": {
+      "title": "Tạo tài khoản nhân viên",
+      "temporaryPassword": "Mật khẩu tạm thời",
+      "submit": "Tạo",
+      "success": "Đã tạo tài khoản. Vui lòng thông báo mật khẩu tạm thời cho người đó.",
+      "error": "Tạo không thành công. Vui lòng kiểm tra lại thông tin."
+    }
+  },
+  "nav": {
+    "dashboard": "Trang chủ",
+    "tasks": "Công việc",
+    "learning": "Học tập",
+    "approvals": "Danh sách chờ phê duyệt",
+    "content": "Quản lý nội dung",
+    "createStaffAccount": "Tạo nhân viên"
+  }
+}
