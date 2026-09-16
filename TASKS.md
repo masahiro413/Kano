@@ -6,14 +6,14 @@ SPEC.md の内容を実装可能な単位に分解したタスクリスト。フ
 
 ## Phase 0: 基盤整備
 
-- [ ] Firebaseプロジェクト作成(Authentication / Firestore / Storage / Hosting を有効化)
-- [ ] フロントエンド雛形構築(React + TypeScript + Vite)
-- [ ] ルーティング設計(生徒/staffで表示を分岐するルート構成)
-- [ ] i18n基盤導入(日本語/ベトナム語切り替え。react-i18next等)
-- [ ] レスポンシブレイアウトの基本方針・ブレークポイント設計
-- [ ] Firestoreデータモデル設計(コレクション構造の確定。SPEC §6.2をベースに詳細化)
-- [ ] Firestoreセキュリティルールの初版作成(ロール・所有者ベースのアクセス制御)
-- [ ] CI/Lint/Format設定(将来の引き継ぎを見据えた最低限の品質担保)
+- [ ] Firebaseプロジェクト作成(Authentication / Firestore / Storage / Hosting を有効化)— **未着手。`app/.env.example`を参照し実際のプロジェクトを作成・接続する必要がある**
+- [x] フロントエンド雛形構築(React + TypeScript + Vite)— `app/`に構築済み
+- [x] ルーティング設計(生徒/staffで表示を分岐するルート構成)— 基本構造のみ。承認待ち・staff専用エリアのガードも実装済み(`app/src/App.tsx`, `app/src/components/guards/`)
+- [x] i18n基盤導入(日本語/ベトナム語切り替え。react-i18next等)— 基本語彙のみ登録済み、画面追加時に随時拡充する
+- [ ] レスポンシブレイアウトの基本方針・ブレークポイント設計 — MUIのデフォルトに依存している状態。明示的な方針は未検討
+- [ ] Firestoreデータモデル設計(コレクション構造の確定。SPEC §6.2をベースに詳細化)— **一部着手**。users/tasks/courses/levelChanges/pronunciationApiUsageLogsの型は`app/src/types/firestore.ts`に定義済みだが、問題集・単語帳・リスニング教材などコンテンツ系コレクションはPhase 3で設計する
+- [x] Firestoreセキュリティルールの初版作成(ロール・所有者ベースのアクセス制御)— `app/firestore.rules`に初版ドラフトあり。コンテンツ系コレクション追加時・Phase 9で拡充する
+- [x] CI/Lint/Format設定(将来の引き継ぎを見据えた最低限の品質担保)— ESLint + Prettier導入済み(`npm run lint` / `npm run format`)。GitHub Actions等のCIパイプライン自体は未構築
 
 ## Phase 1: 認証・生徒登録・承認フロー
 
