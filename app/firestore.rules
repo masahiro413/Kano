@@ -1,0 +1,59 @@
+rules_version = '2';
+
+// 初版ドラフト(TASKS.md Phase 0)。コンテンツ系コレクション(問題集・単語帳等)は
+// Phase 3でスキーマが固まり次第ルールを追加する。Phase 9で網羅的にテストする。
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return isSignedIn() && request.auth.uid == uid;
+    }
+
+    function myProfile() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    function isStaff() {
+      return isSignedIn() && myProfile().role == 'staff';
+    }
+
+    // users/{uid} — 本人は自分のプロフィールを読み書きできる。
+    // ただしrole/approvalStatus/levelの変更はクライアントから許可しない
+    // (承認・レベル変更はstaff操作またはサーバーサイド処理を通す想定。
+    //  具体的なフィールド単位の制御はPhase 1で詳細化する)。
+    match /users/{uid} {
+      allow read: if isOwner(uid) || isStaff();
+      allow create: if isOwner(uid);
+      allow update: if isOwner(uid) || isStaff();
+    }
+
+    // tasks/{taskId} — 所有者(ownerUid)のみread/write可能。共有タスク一覧は存在しない(SPEC §3)。
+    match /tasks/{taskId} {
+      allow read, write: if isSignedIn() && resource.data.ownerUid == request.auth.uid;
+      allow create: if isSignedIn() && request.resource.data.ownerUid == request.auth.uid;
+    }
+
+    // courses/{courseId} — 承認済みユーザーなら誰でも参照可能。作成/編集はstaffのみ。
+    match /courses/{courseId} {
+      allow read: if isSignedIn();
+      allow write: if isStaff();
+    }
+
+    // levelChanges/{changeId} — 本人とstaffのみ参照可能。書き込みはサーバーサイド想定。
+    match /levelChanges/{changeId} {
+      allow read: if isSignedIn() &&
+        (resource.data.studentUid == request.auth.uid || isStaff());
+      allow write: if isStaff();
+    }
+
+    // pronunciationApiUsageLogs/{logId} — 利用ログ。本人とstaffのみ参照可能。
+    match /pronunciationApiUsageLogs/{logId} {
+      allow read: if isSignedIn() &&
+        (resource.data.studentUid == request.auth.uid || isStaff());
+      allow write: if isSignedIn() && request.resource.data.studentUid == request.auth.uid;
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "common": {
+    "appName": "Kano",
+    "loading": "Đang tải...",
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "add": "Thêm",
+    "delete": "Xóa",
+    "complete": "Hoàn thành"
+  },
+  "auth": {
+    "login": "Đăng nhập",
+    "logout": "Đăng xuất",
+    "register": "Đăng ký",
+    "email": "Địa chỉ email",
+    "password": "Mật khẩu"
+  },
+  "registration": {
+    "fullName": "Họ và tên",
+    "phoneNumber": "Số điện thoại",
+    "address": "Địa chỉ",
+    "course": "Khóa học",
+    "displayLanguage": "Ngôn ngữ hiển thị",
+    "submit": "Đăng ký"
+  },
+  "pendingApproval": {
+    "title": "Đang chờ phê duyệt",
+    "message": "Vui lòng chờ giáo viên/quản trị viên phê duyệt. Sau khi được phê duyệt, bạn có thể sử dụng."
+  },
+  "tasks": {
+    "title": "Quản lý công việc",
+    "newTaskPlaceholder": "Nhập công việc mới",
+    "priority": {
+      "high": "Cao",
+      "medium": "Trung bình",
+      "low": "Thấp"
+    }
+  },
+  "nav": {
+    "dashboard": "Trang chủ",
+    "tasks": "Công việc",
+    "learning": "Học tập",
+    "approvals": "Danh sách chờ phê duyệt",
+    "content": "Quản lý nội dung"
+  }
+}

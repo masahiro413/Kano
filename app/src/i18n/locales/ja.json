@@ -1,0 +1,46 @@
+{
+  "common": {
+    "appName": "Kano",
+    "loading": "読み込み中...",
+    "save": "保存",
+    "cancel": "キャンセル",
+    "add": "追加",
+    "delete": "削除",
+    "complete": "完了"
+  },
+  "auth": {
+    "login": "ログイン",
+    "logout": "ログアウト",
+    "register": "新規登録",
+    "email": "メールアドレス",
+    "password": "パスワード"
+  },
+  "registration": {
+    "fullName": "氏名",
+    "phoneNumber": "電話番号",
+    "address": "住所",
+    "course": "受講コース",
+    "displayLanguage": "表示言語",
+    "submit": "登録する"
+  },
+  "pendingApproval": {
+    "title": "承認待ちです",
+    "message": "講師・管理者による承認をお待ちください。承認されるとご利用いただけます。"
+  },
+  "tasks": {
+    "title": "タスク管理",
+    "newTaskPlaceholder": "新しいタスクを入力",
+    "priority": {
+      "high": "高",
+      "medium": "中",
+      "low": "低"
+    }
+  },
+  "nav": {
+    "dashboard": "ホーム",
+    "tasks": "タスク",
+    "learning": "学習",
+    "approvals": "承認待ち一覧",
+    "content": "コンテンツ管理"
+  }
+}
