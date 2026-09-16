@@ -13,7 +13,12 @@
     "logout": "ログアウト",
     "register": "新規登録",
     "email": "メールアドレス",
-    "password": "パスワード"
+    "password": "パスワード",
+    "loginError": "メールアドレスまたはパスワードが正しくありません",
+    "forgotPassword": "パスワードをお忘れですか？",
+    "forgotPasswordSubmit": "リセットメールを送信",
+    "resetEmailSent": "パスワードリセット用のメールを送信しました",
+    "backToLogin": "ログイン画面に戻る"
   },
   "registration": {
     "fullName": "氏名",
@@ -21,11 +26,17 @@
     "address": "住所",
     "course": "受講コース",
     "displayLanguage": "表示言語",
-    "submit": "登録する"
+    "submit": "登録する",
+    "error": "登録に失敗しました。入力内容をご確認ください。",
+    "noCourses": "選択できるコースがまだありません"
   },
   "pendingApproval": {
     "title": "承認待ちです",
     "message": "講師・管理者による承認をお待ちください。承認されるとご利用いただけます。"
+  },
+  "placementTest": {
+    "title": "プレースメントテスト",
+    "comingSoon": "この機能は準備中です。しばらくお待ちください。"
   },
   "tasks": {
     "title": "タスク管理",
@@ -36,11 +47,26 @@
       "low": "低"
     }
   },
+  "staff": {
+    "approvalQueue": {
+      "empty": "承認待ちの生徒はいません",
+      "approve": "承認",
+      "reject": "拒否"
+    },
+    "createAccount": {
+      "title": "staffアカウントの作成",
+      "temporaryPassword": "仮パスワード",
+      "submit": "作成",
+      "success": "アカウントを作成しました。本人に仮パスワードを伝えてください。",
+      "error": "作成に失敗しました。入力内容をご確認ください。"
+    }
+  },
   "nav": {
     "dashboard": "ホーム",
     "tasks": "タスク",
     "learning": "学習",
     "approvals": "承認待ち一覧",
-    "content": "コンテンツ管理"
+    "content": "コンテンツ管理",
+    "createStaffAccount": "staff作成"
   }
 }

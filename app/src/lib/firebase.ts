@@ -34,3 +34,13 @@ if (isFirebaseConfigured) {
 // isFirebaseConfiguredがtrueであることを呼び出し側で保証した上で使うため、
 // 未設定時にアクセスするとエラーになる(意図的)。
 export { auth, db, firebaseApp, storage }
+
+// staffが新規staffアカウントを作成する際、通常のcreateUserWithEmailAndPasswordを使うと
+// 実行した本人(既存staff)のセッションが新規作成したユーザーに切り替わってしまう。
+// それを避けるため、専用のセカンダリAppインスタンスを都度生成できるようにする(SPEC §2.3)。
+export function createSecondaryFirebaseApp(): FirebaseApp {
+  if (!isFirebaseConfigured) {
+    throw new Error('Firebase is not configured')
+  }
+  return initializeApp(firebaseConfig, `secondary-${Date.now()}`)
+}

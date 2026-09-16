@@ -1,18 +1,21 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { AppLayout } from './components/layout/AppLayout'
+import { FirebaseSetupNotice } from './components/FirebaseSetupNotice'
 import { RequireAuth } from './components/guards/RequireAuth'
+import { RequirePlacementTest } from './components/guards/RequirePlacementTest'
 import { RequireStaff } from './components/guards/RequireStaff'
 import { RequireStudentApproved } from './components/guards/RequireStudentApproved'
-import { FirebaseSetupNotice } from './components/FirebaseSetupNotice'
 import { AuthProvider } from './contexts/AuthContext'
 import { isFirebaseConfigured } from './lib/firebase'
+import { DashboardPage } from './pages/DashboardPage'
+import { NotFoundPage } from './pages/NotFoundPage'
+import { ForgotPasswordPage } from './pages/auth/ForgotPasswordPage'
 import { LoginPage } from './pages/auth/LoginPage'
 import { PendingApprovalPage } from './pages/auth/PendingApprovalPage'
 import { RegisterPage } from './pages/auth/RegisterPage'
-import { DashboardPage } from './pages/DashboardPage'
-import { NotFoundPage } from './pages/NotFoundPage'
 import { ApprovalQueuePage } from './pages/staff/ApprovalQueuePage'
 import { ContentManagementPage } from './pages/staff/ContentManagementPage'
+import { CreateStaffAccountPage } from './pages/staff/CreateStaffAccountPage'
 import { LearningHomePage } from './pages/student/LearningHomePage'
 import { PlacementTestPage } from './pages/student/PlacementTestPage'
 import { TasksPage } from './pages/tasks/TasksPage'
@@ -28,20 +31,30 @@ function App() {
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
 
           <Route element={<RequireAuth />}>
             <Route path="/pending-approval" element={<PendingApprovalPage />} />
 
             <Route element={<RequireStudentApproved />}>
-              <Route element={<AppLayout />}>
-                <Route path="/" element={<DashboardPage />} />
-                <Route path="/tasks" element={<TasksPage />} />
-                <Route path="/learning" element={<LearningHomePage />} />
-                <Route path="/learning/placement-test" element={<PlacementTestPage />} />
+              <Route element={<RequirePlacementTest />}>
+                <Route element={<AppLayout />}>
+                  <Route path="/" element={<DashboardPage />} />
+                  <Route path="/tasks" element={<TasksPage />} />
+                  <Route path="/learning" element={<LearningHomePage />} />
+                  <Route
+                    path="/learning/placement-test"
+                    element={<PlacementTestPage />}
+                  />
 
-                <Route element={<RequireStaff />}>
-                  <Route path="/staff/approvals" element={<ApprovalQueuePage />} />
-                  <Route path="/staff/content" element={<ContentManagementPage />} />
+                  <Route element={<RequireStaff />}>
+                    <Route path="/staff/approvals" element={<ApprovalQueuePage />} />
+                    <Route path="/staff/content" element={<ContentManagementPage />} />
+                    <Route
+                      path="/staff/create-account"
+                      element={<CreateStaffAccountPage />}
+                    />
+                  </Route>
                 </Route>
               </Route>
             </Route>

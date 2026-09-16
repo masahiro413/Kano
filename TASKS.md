@@ -17,13 +17,15 @@ SPEC.md の内容を実装可能な単位に分解したタスクリスト。フ
 
 ## Phase 1: 認証・生徒登録・承認フロー
 
-- [ ] Firebase Authentication(Email/Password)組み込み
-- [ ] 生徒向け登録フォーム実装(氏名・メール・パスワード・連絡先・コース選択・表示言語初期設定)
-- [ ] 登録直後の「承認待ち」状態の実装(ログイン可・機能利用不可の専用画面)
-- [ ] staff向け「承認待ち一覧」画面 + 承認/拒否ボタン
-- [ ] 承認後にプレースメントテストへ誘導する導線
-- [ ] パスワードリセットフロー(Firebase標準機能の組み込み)
-- [ ] staffアカウント管理画面の実装(既存staffがメール+仮パスワードで新規staffを作成 — SPEC §2.3)
+- [x] Firebase Authentication(Email/Password)組み込み — `app/src/lib/firebaseAuth.ts`
+- [x] 生徒向け登録フォーム実装(氏名・メール・パスワード・連絡先・コース選択・表示言語初期設定)— `app/src/pages/auth/RegisterPage.tsx`。コース一覧はFirestoreの`courses`コレクションから取得するため、CMS実装(Phase 3)までは手動でコースを投入する必要がある
+- [x] 登録直後の「承認待ち」状態の実装(ログイン可・機能利用不可の専用画面)— `PendingApprovalPage.tsx` + `RequireStudentApproved`ガード
+- [x] staff向け「承認待ち一覧」画面 + 承認/拒否ボタン — `ApprovalQueuePage.tsx`
+- [x] 承認後にプレースメントテストへ誘導する導線 — `RequirePlacementTest`ガード。テスト本体はPhase 4で実装
+- [x] パスワードリセットフロー(Firebase標準機能の組み込み)— `ForgotPasswordPage.tsx`
+- [x] staffアカウント管理画面の実装(既存staffがメール+仮パスワードで新規staffを作成 — SPEC §2.3)— `CreateStaffAccountPage.tsx`。セカンダリFirebase Appインスタンスで実行者のセッションを維持する方式
+- [ ] **実機での動作確認は未実施**。Firebaseプロジェクトが未接続のため、UIの描画確認(ダミー環境変数)のみPlaywrightで実施した。実際のプロジェクト接続後、登録→承認→ログインの一連のフローを必ず確認すること
+- [ ] Firestoreセキュリティルールのフィールド単位の制御(生徒がrole/approvalStatus/levelを自分で書き換えられないようにする等)— 現状は粗い粒度のルールのみ(`app/firestore.rules`)。Phase 9で詳細化・テストする
 
 ## Phase 2: タスク管理機能
 

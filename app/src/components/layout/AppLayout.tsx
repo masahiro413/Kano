@@ -2,6 +2,7 @@ import { AppBar, Box, Button, Stack, Toolbar, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { Link as RouterLink, Outlet } from 'react-router-dom'
 import { useAuth } from '../../contexts/authContext'
+import { signOutUser } from '../../lib/firebaseAuth'
 
 // 生徒/staffで共通のアプリシェル。メニュー項目はロールに応じて出し分ける。
 export function AppLayout() {
@@ -34,6 +35,9 @@ export function AppLayout() {
                 <Button component={RouterLink} to="/staff/content">
                   {t('nav.content')}
                 </Button>
+                <Button component={RouterLink} to="/staff/create-account">
+                  {t('nav.createStaffAccount')}
+                </Button>
               </>
             )}
           </Stack>
@@ -43,6 +47,9 @@ export function AppLayout() {
             </Button>
             <Button size="small" onClick={() => i18n.changeLanguage('vi')}>
               Tiếng Việt
+            </Button>
+            <Button size="small" onClick={() => signOutUser()}>
+              {t('auth.logout')}
             </Button>
           </Stack>
         </Toolbar>

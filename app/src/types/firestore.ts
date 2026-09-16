@@ -25,7 +25,10 @@ export interface StudentProfile extends UserProfile {
   phoneNumber?: string
   address?: string
   courseId: string
-  level: Level
+  // プレースメントテスト受験前はレベル未確定(SPEC §4.2.2)。
+  level: Level | null
+  placementTestCompleted: boolean
+  // 登録時点では選択項目がないため北部標準をデフォルトとし、staffが後から調整する想定。
   evaluationDialect: EvaluationDialect
 }
 

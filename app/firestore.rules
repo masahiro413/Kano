@@ -21,12 +21,13 @@ service cloud.firestore {
     }
 
     // users/{uid} — 本人は自分のプロフィールを読み書きできる。
-    // ただしrole/approvalStatus/levelの変更はクライアントから許可しない
-    // (承認・レベル変更はstaff操作またはサーバーサイド処理を通す想定。
-    //  具体的なフィールド単位の制御はPhase 1で詳細化する)。
+    // staffは新規staffアカウント発行(SPEC §2.3)のため他uidのドキュメントも作成でき、
+    // 承認/拒否(SPEC §2.2)のため更新もできる。
+    // フィールド単位の細かい制御(生徒がrole/approvalStatus/levelを自分で書き換え
+    // られないようにする等)はPhase 1の実装後、Phase 9で網羅的にテストし詳細化する。
     match /users/{uid} {
       allow read: if isOwner(uid) || isStaff();
-      allow create: if isOwner(uid);
+      allow create: if isOwner(uid) || isStaff();
       allow update: if isOwner(uid) || isStaff();
     }
 
