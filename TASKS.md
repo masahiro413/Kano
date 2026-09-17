@@ -29,12 +29,14 @@ SPEC.md の内容を実装可能な単位に分解したタスクリスト。フ
 
 ## Phase 2: タスク管理機能
 
-- [ ] タスクのFirestoreスキーマ確定(タイトル・優先度・完了フラグ・所有者ID)
-- [ ] タスク追加/一覧表示UI
-- [ ] タスク完了トグルUI
-- [ ] タスク削除UI(確認ダイアログ含む)
-- [ ] 優先度によるソート/フィルタ
-- [ ] ユーザーごとのデータ分離をセキュリティルールでテスト
+- [x] タスクのFirestoreスキーマ確定(タイトル・優先度・完了フラグ・所有者ID)— `app/src/types/firestore.ts`のTask型(Phase 0で定義済み)
+- [x] タスク追加/一覧表示UI — `app/src/pages/tasks/TasksPage.tsx`
+- [x] タスク完了トグルUI — チェックボックスで即時更新
+- [x] タスク削除UI(確認ダイアログ含む)— MUI Dialogで確認後に削除
+- [x] 優先度によるソート/フィルタ — フィルタ(すべて/高/中/低)と優先度順ソートの切り替えボタン
+- [ ] **ユーザーごとのデータ分離をセキュリティルールでテスト**— 未実施。`app/firestore.rules`のtasksルール(ownerUid一致のみread/write可)は実装済みだが、実機での検証はPhase 9でまとめて行う
+- [ ] **実機での動作確認は未実施**。Firebase未接続のため、Playwrightで空状態・入力欄・優先度セレクトのレイアウトのみ確認した。実際の追加→完了→削除の一連の動作は接続後に確認が必要
+- 補足: `where(ownerUid==).orderBy(createdAt)`のクエリ用に複合インデックスを`app/firestore.indexes.json`に追加済み。`firebase deploy --only firestore:indexes`が必要
 
 ## Phase 3: 学習コンテンツ管理(CMS/管理画面)
 

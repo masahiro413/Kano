@@ -41,10 +41,17 @@
   "tasks": {
     "title": "タスク管理",
     "newTaskPlaceholder": "新しいタスクを入力",
+    "empty": "タスクはありません",
+    "deleteConfirmTitle": "このタスクを削除しますか？",
     "priority": {
       "high": "高",
       "medium": "中",
       "low": "低"
+    },
+    "filter": {
+      "priority": "優先度",
+      "all": "すべて",
+      "sortByPriority": "優先度順に並び替え"
     }
   },
   "staff": {

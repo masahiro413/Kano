@@ -41,10 +41,17 @@
   "tasks": {
     "title": "Quản lý công việc",
     "newTaskPlaceholder": "Nhập công việc mới",
+    "empty": "Không có công việc nào",
+    "deleteConfirmTitle": "Bạn có chắc muốn xóa công việc này?",
     "priority": {
       "high": "Cao",
       "medium": "Trung bình",
       "low": "Thấp"
+    },
+    "filter": {
+      "priority": "Mức độ ưu tiên",
+      "all": "Tất cả",
+      "sortByPriority": "Sắp xếp theo mức độ ưu tiên"
     }
   },
   "staff": {
