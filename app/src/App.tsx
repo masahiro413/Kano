@@ -15,7 +15,12 @@ import { PendingApprovalPage } from './pages/auth/PendingApprovalPage'
 import { RegisterPage } from './pages/auth/RegisterPage'
 import { ApprovalQueuePage } from './pages/staff/ApprovalQueuePage'
 import { ContentManagementPage } from './pages/staff/ContentManagementPage'
+import { CoursesManagementPage } from './pages/staff/CoursesManagementPage'
 import { CreateStaffAccountPage } from './pages/staff/CreateStaffAccountPage'
+import { ListeningMaterialsManagementPage } from './pages/staff/ListeningMaterialsManagementPage'
+import { QuestionSetDetailPage } from './pages/staff/QuestionSetDetailPage'
+import { QuestionSetsManagementPage } from './pages/staff/QuestionSetsManagementPage'
+import { VocabCardsManagementPage } from './pages/staff/VocabCardsManagementPage'
 import { LearningHomePage } from './pages/student/LearningHomePage'
 import { PlacementTestPage } from './pages/student/PlacementTestPage'
 import { TasksPage } from './pages/tasks/TasksPage'
@@ -50,6 +55,26 @@ function App() {
                   <Route element={<RequireStaff />}>
                     <Route path="/staff/approvals" element={<ApprovalQueuePage />} />
                     <Route path="/staff/content" element={<ContentManagementPage />} />
+                    <Route
+                      path="/staff/content/courses"
+                      element={<CoursesManagementPage />}
+                    />
+                    <Route
+                      path="/staff/content/questions"
+                      element={<QuestionSetsManagementPage />}
+                    />
+                    <Route
+                      path="/staff/content/questions/:setId"
+                      element={<QuestionSetDetailPage />}
+                    />
+                    <Route
+                      path="/staff/content/vocab"
+                      element={<VocabCardsManagementPage />}
+                    />
+                    <Route
+                      path="/staff/content/listening"
+                      element={<ListeningMaterialsManagementPage />}
+                    />
                     <Route
                       path="/staff/create-account"
                       element={<CreateStaffAccountPage />}

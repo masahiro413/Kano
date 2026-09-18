@@ -56,5 +56,27 @@ service cloud.firestore {
         (resource.data.studentUid == request.auth.uid || isStaff());
       allow write: if isSignedIn() && request.resource.data.studentUid == request.auth.uid;
     }
+
+    // 学習コンテンツ(Phase 3, SPEC §4.1〜§4.3) — いずれも承認済みユーザーなら誰でも
+    // 参照可能。作成/編集/削除はstaffのみ。courses/{courseId}と同じ方針。
+    match /vocabCards/{cardId} {
+      allow read: if isSignedIn();
+      allow write: if isStaff();
+    }
+
+    match /listeningMaterials/{materialId} {
+      allow read: if isSignedIn();
+      allow write: if isStaff();
+    }
+
+    match /questionSets/{setId} {
+      allow read: if isSignedIn();
+      allow write: if isStaff();
+
+      match /questions/{questionId} {
+        allow read: if isSignedIn();
+        allow write: if isStaff();
+      }
+    }
   }
 }

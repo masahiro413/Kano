@@ -66,6 +66,86 @@
       "submit": "作成",
       "success": "アカウントを作成しました。本人に仮パスワードを伝えてください。",
       "error": "作成に失敗しました。入力内容をご確認ください。"
+    },
+    "level": "レベル",
+    "levels": {
+      "beginner": "初級",
+      "intermediate": "中級",
+      "advanced": "上級"
+    },
+    "courses": {
+      "title": "コース管理",
+      "add": "コースを追加",
+      "edit": "コースを編集",
+      "empty": "コースはまだありません",
+      "name": "コース名",
+      "description": "説明",
+      "deleteConfirmTitle": "このコースを削除しますか？"
+    },
+    "vocab": {
+      "title": "単語帳管理",
+      "add": "単語カードを追加",
+      "edit": "単語カードを編集",
+      "empty": "単語カードはまだありません",
+      "term": "ベトナム語",
+      "meaning": "意味",
+      "exampleSentence": "例文",
+      "deleteConfirmTitle": "この単語カードを削除しますか？"
+    },
+    "listening": {
+      "title": "リスニング教材管理",
+      "add": "教材を追加",
+      "edit": "教材を編集",
+      "empty": "リスニング教材はまだありません",
+      "materialTitle": "教材タイトル",
+      "transcript": "スクリプト",
+      "chooseFile": "音声ファイルを選択",
+      "error": "アップロードに失敗しました。入力内容をご確認ください。",
+      "deleteConfirmTitle": "この教材を削除しますか？"
+    },
+    "questionSets": {
+      "title": "問題集管理",
+      "add": "問題集を追加",
+      "edit": "問題集を編集",
+      "empty": "問題集はまだありません",
+      "name": "問題集名",
+      "description": "説明",
+      "isPlacementTest": "プレースメントテストとして使用する",
+      "placementTest": "プレースメントテスト",
+      "deleteConfirmTitle": "この問題集を削除しますか？"
+    },
+    "questions": {
+      "add": "問題を追加",
+      "edit": "問題を編集",
+      "empty": "問題はまだありません",
+      "format": "出題形式",
+      "formats": {
+        "choice": "選択式",
+        "free_text": "記述式",
+        "reorder": "並び替え",
+        "error_identification": "誤り指摘",
+        "pronunciation": "発音",
+        "roleplay": "ロールプレイ"
+      },
+      "promptText": "問題文",
+      "explanation": "解説",
+      "listeningMaterial": "リスニング教材",
+      "none": "なし",
+      "dialogueTurns": "会話文の文脈",
+      "speaker": "話者",
+      "text": "発言内容",
+      "addTurn": "発言を追加",
+      "choices": "選択肢",
+      "oneLinePerItem": "1行に1項目ずつ入力してください",
+      "correctIndex": "正解の選択肢番号(0始まり)",
+      "acceptedAnswers": "正解として許容する回答",
+      "pieces": "並び替え対象のピース(正しい順序で入力)",
+      "segments": "文の区切り(誤りを含む1区切りを指定)",
+      "incorrectSegmentIndex": "誤りを含む区切りの番号(0始まり)",
+      "targetText": "発音対象のテキスト",
+      "roleplayTurns": "ロールプレイの発言",
+      "studentSpeaks": "生徒が発話する",
+      "deleteConfirmTitle": "この問題を削除しますか？"
     }
   },
   "nav": {

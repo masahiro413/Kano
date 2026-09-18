@@ -11,7 +11,7 @@ SPEC.md の内容を実装可能な単位に分解したタスクリスト。フ
 - [x] ルーティング設計(生徒/staffで表示を分岐するルート構成)— 基本構造のみ。承認待ち・staff専用エリアのガードも実装済み(`app/src/App.tsx`, `app/src/components/guards/`)
 - [x] i18n基盤導入(日本語/ベトナム語切り替え。react-i18next等)— 基本語彙のみ登録済み、画面追加時に随時拡充する
 - [ ] レスポンシブレイアウトの基本方針・ブレークポイント設計 — MUIのデフォルトに依存している状態。明示的な方針は未検討
-- [ ] Firestoreデータモデル設計(コレクション構造の確定。SPEC §6.2をベースに詳細化)— **一部着手**。users/tasks/courses/levelChanges/pronunciationApiUsageLogsの型は`app/src/types/firestore.ts`に定義済みだが、問題集・単語帳・リスニング教材などコンテンツ系コレクションはPhase 3で設計する
+- [x] Firestoreデータモデル設計(コレクション構造の確定。SPEC §6.2をベースに詳細化)— users/tasks/courses/levelChanges/pronunciationApiUsageLogsに加え、Phase 3で問題集・単語帳・リスニング教材(questionSets/vocabCards/listeningMaterials)の型も`app/src/types/firestore.ts`に定義済み
 - [x] Firestoreセキュリティルールの初版作成(ロール・所有者ベースのアクセス制御)— `app/firestore.rules`に初版ドラフトあり。コンテンツ系コレクション追加時・Phase 9で拡充する
 - [x] CI/Lint/Format設定(将来の引き継ぎを見据えた最低限の品質担保)— ESLint + Prettier導入済み(`npm run lint` / `npm run format`)。GitHub Actions等のCIパイプライン自体は未構築
 
@@ -40,15 +40,16 @@ SPEC.md の内容を実装可能な単位に分解したタスクリスト。フ
 
 ## Phase 3: 学習コンテンツ管理(CMS/管理画面)
 
-- [ ] コース・レベルのマスタデータ設計(コース一覧、レベル定義)
-- [ ] 問題集の作成/編集UI(選択式・穴埋め・リスニング・発音の4形式に対応するフォーム)
-- [ ] 文法問題の作成/編集UI: 並び替え(ピース配列+正解順序)、誤り指摘(セグメント分割+正解位置)、文変換(複数正解パターン登録 — SPEC §4.1.1, §4.1.3)
-- [ ] 会話文問題の作成/編集UI: 対話ターン配列の管理、内容理解質問、ロールプレイ用台本、翻訳(複数正解パターン登録 — SPEC §4.1.2, §4.1.3)
-- [ ] 単語帳の作成/編集UI
-- [ ] リスニング教材の音声アップロード機能(Firebase Storage連携)
-- [ ] TTSによる音声自動生成機能(Azure Neural TTS or Google Cloud TTS連携)
-- [ ] コース×レベルによる公開範囲タグ付けUI
-- [ ] コンテンツ一覧・検索・フィルタ画面(staff向け)
+- [x] コース・レベルのマスタデータ設計(コース一覧、レベル定義)— `Course`型はPhase 0で定義済み。管理UIを`CoursesManagementPage.tsx`として実装。レベルは`Level`型(既存)を共通コンポーネント`CourseLevelSelect.tsx`でコース選択とセットにして各コンテンツ編集フォームに組み込んだ
+- [x] 問題集の作成/編集UI — `QuestionSetsManagementPage.tsx`(`questionSets/{setId}`)。`isPlacementTest`フラグでプレースメントテスト用の問題集も同じ型で表現する(SPEC §4.2.2)
+- [x] 文法問題・会話文問題の作成/編集UI(選択式・記述式・並び替え・誤り指摘・発音・ロールプレイの6形式)— `QuestionEditorDialog.tsx`。SPEC §4.1.1/§4.1.2で列挙された8+の出題形式は、この6つの回答形式(format)+任意の`listeningMaterialId`(リスニング教材参照)+`dialogueTurns`(会話文の文脈)の組み合わせとして表現する設計とした。`questionSets/{setId}/questions/{questionId}`サブコレクションに保存(`lib/questions.ts`, `hooks/useQuestions.ts`, `types/firestore.ts`の`Question`判別共用体)
+- [x] 単語帳の作成/編集UI — `VocabCardsManagementPage.tsx`(`vocabCards/{cardId}`)。SRSの復習スケジューリング自体はPhase 6で実装する
+- [x] リスニング教材の音声アップロード機能(Firebase Storage連携)— `ListeningMaterialsManagementPage.tsx`。`listening-materials/`パスにアップロードし、`listeningMaterials/{materialId}`にメタデータを保存
+- [ ] **TTSによる音声自動生成機能は未実装(アーキテクチャ上の課題として保留)**。Azure/Google Cloud TTSはAPIキーを要するが、本アプリはFirebaseのみで自前サーバーを持たない構成(CLAUDE.md)のため、クライアントに秘密鍵を置く実装は行わなかった。Cloud FunctionsなどFirebase側のサーバーレス機能を介した実装が必要— 着手前にユーザーに実装方針を確認すること
+- [x] コース×レベルによる公開範囲タグ付けUI — 問題集・単語帳・リスニング教材の各編集フォームに`CourseLevelSelect`として共通実装
+- [ ] コンテンツ一覧・検索・フィルタ画面(staff向け)— 各コンテンツ種別ごとの単純な一覧UIまでは実装したが、横断検索・絞り込みは未実装。スコープ外と判断(現時点でコンテンツ量が少なく必要性が低いため)。データ量が増えた段階で再検討する
+- [ ] **実機での動作確認は未実施**。Firebase未接続のため、Playwrightでレイアウト・問題編集フォームのformat切り替え(選択式/ロールプレイ)の描画のみ確認した。実際のFirestore/Storageへの保存・読み込みは接続後に確認が必要
+- [ ] `questionSets`/`vocabCards`/`listeningMaterials`/`questionSets/{id}/questions`のFirestoreセキュリティルールは`courses`と同じ方針(read: 承認済みユーザー、write: staffのみ)で追加済み。Phase 9で網羅的にテストする
 
 ## Phase 4: プレースメントテスト & レベル判定ロジック
 

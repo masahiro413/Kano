@@ -66,6 +66,86 @@
       "submit": "Tạo",
       "success": "Đã tạo tài khoản. Vui lòng thông báo mật khẩu tạm thời cho người đó.",
       "error": "Tạo không thành công. Vui lòng kiểm tra lại thông tin."
+    },
+    "level": "Trình độ",
+    "levels": {
+      "beginner": "Sơ cấp",
+      "intermediate": "Trung cấp",
+      "advanced": "Cao cấp"
+    },
+    "courses": {
+      "title": "Quản lý khóa học",
+      "add": "Thêm khóa học",
+      "edit": "Sửa khóa học",
+      "empty": "Chưa có khóa học nào",
+      "name": "Tên khóa học",
+      "description": "Mô tả",
+      "deleteConfirmTitle": "Bạn có chắc muốn xóa khóa học này?"
+    },
+    "vocab": {
+      "title": "Quản lý thẻ từ vựng",
+      "add": "Thêm thẻ từ vựng",
+      "edit": "Sửa thẻ từ vựng",
+      "empty": "Chưa có thẻ từ vựng nào",
+      "term": "Tiếng Việt",
+      "meaning": "Nghĩa",
+      "exampleSentence": "Câu ví dụ",
+      "deleteConfirmTitle": "Bạn có chắc muốn xóa thẻ từ vựng này?"
+    },
+    "listening": {
+      "title": "Quản lý tài liệu nghe",
+      "add": "Thêm tài liệu",
+      "edit": "Sửa tài liệu",
+      "empty": "Chưa có tài liệu nghe nào",
+      "materialTitle": "Tiêu đề tài liệu",
+      "transcript": "Lời thoại",
+      "chooseFile": "Chọn tệp âm thanh",
+      "error": "Tải lên không thành công. Vui lòng kiểm tra lại thông tin.",
+      "deleteConfirmTitle": "Bạn có chắc muốn xóa tài liệu này?"
+    },
+    "questionSets": {
+      "title": "Quản lý bộ câu hỏi",
+      "add": "Thêm bộ câu hỏi",
+      "edit": "Sửa bộ câu hỏi",
+      "empty": "Chưa có bộ câu hỏi nào",
+      "name": "Tên bộ câu hỏi",
+      "description": "Mô tả",
+      "isPlacementTest": "Sử dụng làm bài kiểm tra xếp lớp",
+      "placementTest": "Bài kiểm tra xếp lớp",
+      "deleteConfirmTitle": "Bạn có chắc muốn xóa bộ câu hỏi này?"
+    },
+    "questions": {
+      "add": "Thêm câu hỏi",
+      "edit": "Sửa câu hỏi",
+      "empty": "Chưa có câu hỏi nào",
+      "format": "Hình thức câu hỏi",
+      "formats": {
+        "choice": "Trắc nghiệm",
+        "free_text": "Tự luận",
+        "reorder": "Sắp xếp lại",
+        "error_identification": "Tìm lỗi sai",
+        "pronunciation": "Phát âm",
+        "roleplay": "Nhập vai"
+      },
+      "promptText": "Nội dung câu hỏi",
+      "explanation": "Giải thích",
+      "listeningMaterial": "Tài liệu nghe",
+      "none": "Không có",
+      "dialogueTurns": "Bối cảnh hội thoại",
+      "speaker": "Người nói",
+      "text": "Nội dung lời nói",
+      "addTurn": "Thêm lượt nói",
+      "choices": "Các lựa chọn",
+      "oneLinePerItem": "Nhập mỗi mục trên một dòng",
+      "correctIndex": "Số thứ tự đáp án đúng (bắt đầu từ 0)",
+      "acceptedAnswers": "Các câu trả lời được chấp nhận",
+      "pieces": "Các phần cần sắp xếp (nhập theo đúng thứ tự)",
+      "segments": "Các đoạn của câu (chỉ định đoạn chứa lỗi)",
+      "incorrectSegmentIndex": "Số thứ tự đoạn chứa lỗi (bắt đầu từ 0)",
+      "targetText": "Văn bản cần phát âm",
+      "roleplayTurns": "Lời thoại nhập vai",
+      "studentSpeaks": "Học viên phát âm",
+      "deleteConfirmTitle": "Bạn có chắc muốn xóa câu hỏi này?"
     }
   },
   "nav": {
