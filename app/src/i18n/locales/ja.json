@@ -52,7 +52,21 @@
     "voiceNotYetSupported": "この問題は音声機能が準備中のため、現在は採点対象外です"
   },
   "learning": {
-    "empty": "現在のコース・レベルで利用できる問題集はまだありません"
+    "empty": "現在のコース・レベルで利用できる問題集はまだありません",
+    "vocabCardTitle": "単語帳",
+    "vocabCardDescription": "今日復習すべき単語カードを学習します",
+    "questionSetsTitle": "問題集"
+  },
+  "vocabPractice": {
+    "title": "単語帳",
+    "remaining": "残り{{count}}枚",
+    "reveal": "答えを見る",
+    "again": "もう一度",
+    "hard": "難しい",
+    "good": "普通",
+    "easy": "簡単",
+    "empty": "今日復習すべき単語カードはありません",
+    "sessionComplete": "{{count}}枚のカードを復習しました。お疲れさまでした。"
   },
   "questionPractice": {
     "answeredCount": "回答済み: {{answered}} / {{total}}問",

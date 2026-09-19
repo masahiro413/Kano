@@ -77,10 +77,13 @@ SPEC.md の内容を実装可能な単位に分解したタスクリスト。フ
 
 ## Phase 6: 学習機能 — 単語帳(SRS)
 
-- [ ] SRSライブラリ(ts-fsrs等)の選定・導入 — SPEC §4.1
-- [ ] 単語帳の出題スケジューリングロジック
-- [ ] 単語帳の学習UI(表/裏カード形式など)
-- [ ] 習熟度の記録・可視化
+- [x] SRSライブラリ(ts-fsrs等)の選定・導入 — SPEC §4.1の通り`ts-fsrs`(FSRSアルゴリズムの実装)を導入。`lib/srs.ts`がライブラリのCard型とFirestore保存用の`VocabReview`型(`types/firestore.ts`)を相互変換する薄いラッパー
+- [x] 単語帳の出題スケジューリングロジック — `lib/srs.ts`の`isDue`(未学習または復習予定日を過ぎたカードを対象とする)と`computeNextReview`(評価から次回復習日時を算出)。`vocabReviews/{studentUid}_{vocabCardId}`に生徒×カードごとのSRS状態を保存(`lib/vocabReviews.ts`)
+- [x] 単語帳の学習UI(表/裏カード形式など)— `VocabPracticePage.tsx`。表(用語)→「答えを見る」→裏(意味・例文)→もう一度/難しい/普通/簡単の4段階評価、という一般的なSRSフラッシュカードUIを実装。出題キューはセッション開始時に1回だけ確定させ(`VocabPracticeSession`)、復習記録による購読データの更新で出題中のカードが入れ替わらないようにした
+- [ ] 習熟度の記録・可視化 — 復習状態(`vocabReviews`)自体はts-fsrsのstability/difficulty/repsなどのフィールドとして記録済みだが、それを可視化するUIはまだない。Phase 8(進捗ダッシュボード)で対応する
+- [x] `LearningHomePage`に単語帳への導線を追加
+- [ ] **実機での動作確認は未実施**。Firebase未接続のため、`VocabPracticeSession`にモックデータを渡してPlaywrightで表→裏のカード反転UIの描画のみ確認した。ts-fsrsライブラリ自体のAPI呼び出し(`createEmptyCard`/`fsrs().next()`)はNode上で直接動作確認し、期待通りdue日時・stability等が計算されることを確認済み。実際のFirestoreへの書き込み・出題キューの継続的な動作は接続後に確認が必要
+- [ ] `vocabReviews`のFirestoreセキュリティルールを追加済み(本人のstudentUidでのcreate/updateのみ許可)。Phase 9で網羅的にテストする
 
 ## Phase 7: 学習機能 — 発音練習
 

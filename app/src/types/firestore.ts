@@ -206,3 +206,25 @@ export interface LevelThresholdSettings {
   demotionThreshold: number // 直近N問の正答率(%)がこれを下回ったら降級
   recentQuestionCount: number // 直近何問を判定対象とするか(N)
 }
+
+// ---- 単語帳SRS(SPEC §4.1、Phase 6) ----
+
+// vocabReviews/{studentUid}_{vocabCardId} — 生徒ごと・単語カードごとの間隔反復(SRS)
+// スケジュール状態。アルゴリズムは自前実装せず、既存OSSライブラリ ts-fsrs(FSRS)を
+// 導入して利用する(SPEC §4.1)。フィールドはts-fsrsのCard型に対応する。
+// state: 0=New, 1=Learning, 2=Review, 3=Relearning(ts-fsrsのState enumの値)
+export interface VocabReview {
+  id: string
+  studentUid: string
+  vocabCardId: string
+  due: string // 次回復習予定日時(ISO文字列)
+  stability: number
+  difficulty: number
+  scheduledDays: number
+  learningSteps: number
+  reps: number
+  lapses: number
+  state: number
+  lastReview: string | null
+  updatedAt: string
+}

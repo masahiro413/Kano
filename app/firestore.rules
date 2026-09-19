@@ -98,5 +98,15 @@ service cloud.firestore {
         allow write: if isStaff();
       }
     }
+
+    // vocabReviews/{studentUid}_{vocabCardId} — 生徒ごとの単語帳SRS復習状態。
+    // 本人とstaffのみ参照可能。自前サーバーを持たない構成のため、SRSの算出・書き込みは
+    // 本人のブラウザから直接行う(levelChanges/answerLogsと同じ方針、Phase 6)。
+    match /vocabReviews/{reviewId} {
+      allow read: if isSignedIn() &&
+        (resource.data.studentUid == request.auth.uid || isStaff());
+      allow create, update: if isSignedIn() &&
+        request.resource.data.studentUid == request.auth.uid;
+    }
   }
 }

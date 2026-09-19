@@ -25,6 +25,7 @@ import { VocabCardsManagementPage } from './pages/staff/VocabCardsManagementPage
 import { LearningHomePage } from './pages/student/LearningHomePage'
 import { PlacementTestPage } from './pages/student/PlacementTestPage'
 import { QuestionSetPracticePage } from './pages/student/QuestionSetPracticePage'
+import { VocabPracticePage } from './pages/student/VocabPracticePage'
 import { TasksPage } from './pages/tasks/TasksPage'
 
 function App() {
@@ -57,6 +58,7 @@ function App() {
                     path="/learning/questions/:setId"
                     element={<QuestionSetPracticePage />}
                   />
+                  <Route path="/learning/vocab" element={<VocabPracticePage />} />
 
                   <Route element={<RequireStaff />}>
                     <Route path="/staff/approvals" element={<ApprovalQueuePage />} />

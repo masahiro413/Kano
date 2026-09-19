@@ -7,7 +7,7 @@ import type { StudentProfile } from '../../types/firestore'
 
 // 学習機能(問題集・単語帳・リスニング・発音)のトップ画面。
 // タスク管理とはデータ・機能ともに独立したセクション(SPEC §0)。
-// 現時点では問題演習(Phase 5)のみ実装済み。単語帳(Phase 6)・発音練習(Phase 7)は
+// 現時点では問題演習(Phase 5)・単語帳(Phase 6)を実装済み。発音練習(Phase 7)は
 // 別途実装する。
 export function LearningHomePage() {
   const { t } = useTranslation()
@@ -28,6 +28,21 @@ export function LearningHomePage() {
     <Box sx={{ maxWidth: 640 }}>
       <Typography variant="h4" component="h1" sx={{ mb: 2 }}>
         {t('nav.learning')}
+      </Typography>
+
+      <Card sx={{ mb: 3 }}>
+        <CardActionArea component={RouterLink} to="/learning/vocab">
+          <CardContent>
+            <Typography variant="h6">{t('learning.vocabCardTitle')}</Typography>
+            <Typography color="text.secondary">
+              {t('learning.vocabCardDescription')}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+
+      <Typography variant="h6" sx={{ mb: 1 }}>
+        {t('learning.questionSetsTitle')}
       </Typography>
 
       {!loading && availableSets.length === 0 && (

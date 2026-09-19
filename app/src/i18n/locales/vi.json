@@ -52,7 +52,21 @@
     "voiceNotYetSupported": "Câu hỏi này chưa được chấm điểm vì tính năng âm thanh đang được chuẩn bị"
   },
   "learning": {
-    "empty": "Hiện chưa có bộ câu hỏi nào cho khóa học/trình độ của bạn"
+    "empty": "Hiện chưa có bộ câu hỏi nào cho khóa học/trình độ của bạn",
+    "vocabCardTitle": "Sổ từ vựng",
+    "vocabCardDescription": "Ôn tập các thẻ từ vựng cần học hôm nay",
+    "questionSetsTitle": "Bộ câu hỏi"
+  },
+  "vocabPractice": {
+    "title": "Sổ từ vựng",
+    "remaining": "Còn lại {{count}} thẻ",
+    "reveal": "Xem đáp án",
+    "again": "Lặp lại",
+    "hard": "Khó",
+    "good": "Bình thường",
+    "easy": "Dễ",
+    "empty": "Hiện không có thẻ từ vựng nào cần ôn tập hôm nay",
+    "sessionComplete": "Bạn đã ôn tập {{count}} thẻ. Cảm ơn bạn đã cố gắng!"
   },
   "questionPractice": {
     "answeredCount": "Đã trả lời: {{answered}} / {{total}} câu",
