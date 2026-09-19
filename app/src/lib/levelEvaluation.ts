@@ -1,6 +1,6 @@
 import type { Level, LevelThresholdSettings } from '../types/firestore'
 
-const LEVEL_ORDER: Level[] = ['beginner', 'intermediate', 'advanced']
+export const LEVEL_ORDER: Level[] = ['beginner', 'intermediate', 'advanced']
 
 // プレースメントテストの正答率から初期レベルを固定閾値で判定する(SPEC §4.2.2)。
 // 例: 80%以上=上級、40〜79%=中級、40%未満=初級

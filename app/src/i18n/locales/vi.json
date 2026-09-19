@@ -51,6 +51,17 @@
     "reset": "Làm lại",
     "voiceNotYetSupported": "Câu hỏi này chưa được chấm điểm vì tính năng âm thanh đang được chuẩn bị"
   },
+  "learning": {
+    "empty": "Hiện chưa có bộ câu hỏi nào cho khóa học/trình độ của bạn"
+  },
+  "questionPractice": {
+    "answeredCount": "Đã trả lời: {{answered}} / {{total}} câu",
+    "submit": "Nộp bài",
+    "resultTitle": "Kết quả",
+    "resultScore": "Bạn đã trả lời đúng {{correct}}/{{total}} câu",
+    "levelChanged": "Trình độ của bạn đã thay đổi thành \"{{level}}\"",
+    "backToLearning": "Quay lại trang học tập"
+  },
   "tasks": {
     "title": "Quản lý công việc",
     "newTaskPlaceholder": "Nhập công việc mới",

@@ -51,6 +51,17 @@
     "reset": "やり直す",
     "voiceNotYetSupported": "この問題は音声機能が準備中のため、現在は採点対象外です"
   },
+  "learning": {
+    "empty": "現在のコース・レベルで利用できる問題集はまだありません"
+  },
+  "questionPractice": {
+    "answeredCount": "回答済み: {{answered}} / {{total}}問",
+    "submit": "提出する",
+    "resultTitle": "結果",
+    "resultScore": "{{total}}問中{{correct}}問正解しました",
+    "levelChanged": "レベルが「{{level}}」に変更されました",
+    "backToLearning": "学習画面へ戻る"
+  },
   "tasks": {
     "title": "タスク管理",
     "newTaskPlaceholder": "新しいタスクを入力",

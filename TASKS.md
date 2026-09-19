@@ -63,15 +63,17 @@ SPEC.md の内容を実装可能な単位に分解したタスクリスト。フ
 
 ## Phase 5: 学習機能 — 問題演習
 
-- [ ] 選択式問題の出題・採点UI
-- [ ] 穴埋め・記述式問題の出題・採点UI
-- [ ] リスニング問題の出題UI(音声再生 + 回答フォーム)
-- [ ] 並び替え問題の出題UI(ドラッグ&ドロップ等でピースを並べる)
-- [ ] 誤り指摘問題の出題UI(文中のセグメントを選択させる)
-- [ ] 文変換・翻訳問題の出題UI + 複数正解パターンとの照合ロジック(SPEC §4.1.3)
-- [ ] 会話文の内容理解問題の出題UI(対話再生/表示 + 要約・詳細質問)
-- [ ] ロールプレイ問題の出題UI(対話ターンの進行管理 + Azure Pronunciation Assessment連携 — Phase 7と連携)。既存の固定ターン台本型に加え、**Anam AIアバターとの自由会話モード**(SPEC §4.1.2-a)を導入する方針が示されている。実装前にSPEC §8-11の未決事項(既存方式との併存可否、セッショントークン発行基盤、ベトナム語方言対応の声の有無、料金)をユーザーに確認すること
-- [ ] 問題演習結果の記録(正答率、履歴)
+- [x] 選択式問題の出題・採点UI — `QuestionAnswerInput.tsx`(Phase 4で先行実装済み、Phase 5でLearningHomePage/QuestionSetPracticePageから利用する形に配線)
+- [x] 穴埋め・記述式問題の出題・採点UI — 同上。複数正解パターンの照合は`lib/questionScoring.ts`の`isAnswerCorrect`(前後・連続空白と大小文字を許容した完全一致判定、SPEC §4.1.3)
+- [x] リスニング問題の出題UI(音声再生 + 回答フォーム)— `QuestionContext.tsx`。`listeningMaterialId`が設定された問題の上部に音声プレイヤーを表示する。回答フォーム自体は他形式と共通の`QuestionAnswerInput`を使う
+- [x] 並び替え問題の出題UI — ドラッグ&ドロップではなく、シャッフルされたピースをクリックした順に並べる方式で実装(`QuestionAnswerInput.tsx`)。ライブラリ追加を避けクリック操作のみで完結させた
+- [x] 誤り指摘問題の出題UI(文中のセグメントを選択させる)— `QuestionAnswerInput.tsx`
+- [x] 文変換・翻訳問題の出題UI + 複数正解パターンとの照合ロジック(SPEC §4.1.3)— 新形式は追加せず、既存の`free_text`形式(複数の`acceptedAnswers`)をそのまま使う設計とした(SPEC §4.1.3の通り)
+- [x] 会話文の内容理解問題の出題UI(対話再生/表示 + 要約・詳細質問)— `QuestionContext.tsx`が`dialogueTurns`を吹き出し風に表示し、その下に`choice`/`free_text`形式で質問に答える構成。新形式は追加せず既存形式の組み合わせで表現
+- [ ] ロールプレイ問題の出題UI(対話ターンの進行管理 + Azure Pronunciation Assessment連携 — Phase 7と連携)。既存の固定ターン台本型に加え、**Anam AIアバターとの自由会話モード**(SPEC §4.1.2-a)を導入する方針が示されている。実装前にSPEC §8-11の未決事項(既存方式との併存可否、セッショントークン発行基盤、ベトナム語方言対応の声の有無、料金)をユーザーに確認すること。現状`QuestionAnswerInput`は「準備中」の案内のみ表示し採点対象外(Phase 4と同じ方針)
+- [x] 問題演習結果の記録(正答率、履歴)— `lib/questionPractice.ts`の`submitQuestionPractice`。`answerLogs`に解答履歴を記録したうえで、直近N問(`LevelThresholdSettings.recentQuestionCount`)を再取得し`evaluatePromotionDemotion`(Phase 4で実装済み・未配線だった関数)を呼び出して自動昇降級を判定・反映する配線をここで行った
+- [x] `LearningHomePage`を「生徒のコース×レベルに一致する非プレースメント問題集の一覧」画面として実装し、`QuestionSetPracticePage`(`/learning/questions/:setId`)への導線とした
+- [ ] **実機での動作確認は未実施**。Firebase未接続のため、Playwrightで`QuestionAnswerInput`+`QuestionContext`の組み合わせ(選択式+会話文脈、記述式)と`LearningHomePage`の空状態表示のみ確認した。実際の演習提出→解答履歴記録→自動昇降級判定の一連の動作は接続後に確認が必要
 
 ## Phase 6: 学習機能 — 単語帳(SRS)
 
@@ -126,4 +128,4 @@ SPEC.md の内容を実装可能な単位に分解したタスクリスト。フ
 - Phase 1(認証・承認)が完了しないと、Phase 4以降の生徒向け機能はテストできない。
 - Phase 3(コンテンツ管理)がないと、Phase 5〜7の学習機能は表示するコンテンツが存在しない。
 - Phase 4(プレースメントテスト・レベル判定)はPhase 3のコース/レベルマスタに依存する。プレースメントテストは発音問題を含むため本来はPhase 7.1(Azure Pronunciation Assessment連携)の一部を先行実装する必要があるが、実装時のユーザー判断により、発音・ロールプレイ形式を採点対象外として除外する形でPhase 7.1を待たずに受験フロー自体は実装済み。Phase 7.1実装後、発音問題も採点対象に含めるよう`lib/questionScoring.ts`の`isScorable`を拡張する必要がある。
-- Phase 4で実装したレベル自動昇降級ロジック(`lib/levelEvaluation.ts`の`evaluatePromotionDemotion`)は、Phase 5(問題演習UI)が解答履歴(`answerLogs`)を蓄積するようになって初めて実際に機能する。Phase 5実装時にこの関数の呼び出し配線を追加すること。
+- ~~Phase 4で実装したレベル自動昇降級ロジック(`lib/levelEvaluation.ts`の`evaluatePromotionDemotion`)は、Phase 5(問題演習UI)が解答履歴(`answerLogs`)を蓄積するようになって初めて実際に機能する。~~ → **解消済み**。Phase 5で`lib/questionPractice.ts`の`submitQuestionPractice`から呼び出す配線を実装した。
