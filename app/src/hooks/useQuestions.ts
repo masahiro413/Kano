@@ -5,10 +5,10 @@ import type { Question } from '../types/firestore'
 
 export function useQuestions(setId: string) {
   const [questions, setQuestions] = useState<Question[]>([])
-  const [loading, setLoading] = useState(!!db)
+  const [loading, setLoading] = useState(!!db && !!setId)
 
   useEffect(() => {
-    if (!db) return
+    if (!db || !setId) return
 
     const q = query(
       collection(db, 'questionSets', setId, 'questions'),

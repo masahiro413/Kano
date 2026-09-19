@@ -36,7 +36,20 @@
   },
   "placementTest": {
     "title": "プレースメントテスト",
-    "comingSoon": "この機能は準備中です。しばらくお待ちください。"
+    "comingSoon": "この機能は準備中です。しばらくお待ちください。",
+    "instruction": "すべての問題に回答してから提出してください。発音・ロールプレイの問題は現在準備中のため採点対象外です。",
+    "notReady": "受講コースのプレースメントテストはまだ準備されていません。staffにお問い合わせください。",
+    "answeredCount": "回答済み: {{answered}} / {{total}}問",
+    "submit": "提出する",
+    "resultTitle": "結果",
+    "resultLevel": "あなたのレベルは「{{level}}」と判定されました",
+    "goToLearning": "学習画面へ進む"
+  },
+  "questionAnswer": {
+    "reorderInstruction": "正しい順番になるようにピースをクリックしてください",
+    "yourOrder": "現在の順番",
+    "reset": "やり直す",
+    "voiceNotYetSupported": "この問題は音声機能が準備中のため、現在は採点対象外です"
   },
   "tasks": {
     "title": "タスク管理",
@@ -146,6 +159,15 @@
       "roleplayTurns": "ロールプレイの発言",
       "studentSpeaks": "生徒が発話する",
       "deleteConfirmTitle": "この問題を削除しますか？"
+    },
+    "levelSettings": {
+      "title": "レベル判定の設定",
+      "placementAdvancedMin": "プレースメントテスト: 上級の正答率しきい値(%)",
+      "placementIntermediateMin": "プレースメントテスト: 中級の正答率しきい値(%)",
+      "promotionThreshold": "昇級の正答率しきい値(%、これを超えたら昇級)",
+      "demotionThreshold": "降級の正答率しきい値(%、これを下回ったら降級)",
+      "recentQuestionCount": "昇降級判定に使う直近の問題数",
+      "saved": "設定を保存しました"
     }
   },
   "nav": {
@@ -154,6 +176,7 @@
     "learning": "学習",
     "approvals": "承認待ち一覧",
     "content": "コンテンツ管理",
+    "levelSettings": "レベル設定",
     "createStaffAccount": "staff作成"
   }
 }

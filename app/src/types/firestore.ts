@@ -58,7 +58,8 @@ export interface Task {
 export interface LevelChange {
   id: string
   studentUid: string
-  fromLevel: Level
+  // プレースメントテストによる初期設定の場合、変更前のレベルは存在しない
+  fromLevel: Level | null
   toLevel: Level
   reason: 'placement_test' | 'auto_promotion' | 'auto_demotion'
   createdAt: string
@@ -176,4 +177,32 @@ export interface VocabCard {
   exampleSentence?: string
   audioAssetPath?: string
   createdAt: string
+}
+
+// ---- レベル判定(SPEC §4.2、Phase 4) ----
+
+// answerLogs/{logId} — 生徒の解答履歴。プレースメントテストの結果判定と、
+// 通常の問題演習でのレベル自動昇降級判定(直近N問の正答率)の両方の基礎データとして使う。
+// 発音・ロールプレイ形式(現状スコアリング未実装)は記録しない。
+export interface AnswerLog {
+  id: string
+  studentUid: string
+  questionSetId: string
+  questionId: string
+  format: QuestionFormat
+  correct: boolean
+  isPlacementTest: boolean
+  createdAt: string
+}
+
+// settings/levelThresholds — レベル判定に使う閾値。staffが管理画面から調整できる
+// 設定値とする(SPEC §4.2.1, §4.2.2)。ドキュメントは単一(シングルトン)。
+export interface LevelThresholdSettings {
+  // プレースメントテストの正答率による初期レベル判定(固定閾値方式、SPEC §4.2.2)
+  placementAdvancedMin: number // この正答率(%)以上で上級
+  placementIntermediateMin: number // この正答率(%)以上で中級(advancedMin未満の場合)。未満なら初級
+  // 通常問題演習でのレベル自動昇降級(ヒステリシス方式、SPEC §4.2.1)
+  promotionThreshold: number // 直近N問の正答率(%)がこれを超えたら昇級
+  demotionThreshold: number // 直近N問の正答率(%)がこれを下回ったら降級
+  recentQuestionCount: number // 直近何問を判定対象とするか(N)
 }

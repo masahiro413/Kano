@@ -43,10 +43,30 @@ service cloud.firestore {
       allow write: if isStaff();
     }
 
-    // levelChanges/{changeId} — 本人とstaffのみ参照可能。書き込みはサーバーサイド想定。
+    // levelChanges/{changeId} — 本人とstaffのみ参照可能。
+    // プレースメントテスト提出時・レベル自動昇降級判定時に本人のブラウザから
+    // 直接作成される(自前サーバーを持たない構成のためクライアントサイドで判定・記録する。
+    // SPEC §4.2.1, §4.2.2)。改ざん防止のため更新・削除はstaffのみに限定する。
     match /levelChanges/{changeId} {
       allow read: if isSignedIn() &&
         (resource.data.studentUid == request.auth.uid || isStaff());
+      allow create: if isSignedIn() &&
+        (request.resource.data.studentUid == request.auth.uid || isStaff());
+      allow update, delete: if isStaff();
+    }
+
+    // answerLogs/{logId} — 生徒の解答履歴。本人とstaffのみ参照可能。
+    // 本人のブラウザから作成されるのみで、改ざん防止のため更新・削除は許可しない(Phase 4)。
+    match /answerLogs/{logId} {
+      allow read: if isSignedIn() &&
+        (resource.data.studentUid == request.auth.uid || isStaff());
+      allow create: if isSignedIn() && request.resource.data.studentUid == request.auth.uid;
+    }
+
+    // settings/{settingId} — レベル判定閾値などのアプリ設定。承認済みユーザーなら
+    // 誰でも参照可能(採点ロジックがクライアントサイドで動くため)。編集はstaffのみ(Phase 4)。
+    match /settings/{settingId} {
+      allow read: if isSignedIn();
       allow write: if isStaff();
     }
 

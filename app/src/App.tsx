@@ -17,6 +17,7 @@ import { ApprovalQueuePage } from './pages/staff/ApprovalQueuePage'
 import { ContentManagementPage } from './pages/staff/ContentManagementPage'
 import { CoursesManagementPage } from './pages/staff/CoursesManagementPage'
 import { CreateStaffAccountPage } from './pages/staff/CreateStaffAccountPage'
+import { LevelSettingsPage } from './pages/staff/LevelSettingsPage'
 import { ListeningMaterialsManagementPage } from './pages/staff/ListeningMaterialsManagementPage'
 import { QuestionSetDetailPage } from './pages/staff/QuestionSetDetailPage'
 import { QuestionSetsManagementPage } from './pages/staff/QuestionSetsManagementPage'
@@ -75,6 +76,7 @@ function App() {
                       path="/staff/content/listening"
                       element={<ListeningMaterialsManagementPage />}
                     />
+                    <Route path="/staff/level-settings" element={<LevelSettingsPage />} />
                     <Route
                       path="/staff/create-account"
                       element={<CreateStaffAccountPage />}

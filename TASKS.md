@@ -53,12 +53,13 @@ SPEC.md の内容を実装可能な単位に分解したタスクリスト。フ
 
 ## Phase 4: プレースメントテスト & レベル判定ロジック
 
-- [ ] プレースメントテストの出題内容作成: 選択式・文法・リスニング・発音を含む20〜30問(SPEC §4.2.2)
-- [ ] プレースメントテスト受験フロー実装(発音問題を含むためAzure Pronunciation Assessment連携が前提 — Phase 7と依存関係あり)
-- [ ] プレースメントテスト結果からの初期レベル自動判定(正答率の固定閾値、staffが調整可能な設定値 — SPEC §4.2.2)
-- [ ] レベル自動昇降級ロジックの実装: 直近N問の正答率+ヒステリシス(昇級/降級ラインの間の安定ゾーン)— SPEC §4.2.1
-- [ ] 閾値(昇級ライン・降級ライン・N値)をstaffが管理画面から調整できる設定項目として実装
-- [ ] レベル変更の履歴記録
+- [ ] プレースメントテストの出題内容作成: 選択式・文法・リスニング・発音を含む20〜30問(SPEC §4.2.2)— これは開発タスクではなくコンテンツ入力作業。Phase 3で実装済みのCMS(`isPlacementTest`フラグ付き問題集)を使ってstaffが実際に投入する必要がある。現時点ではテストデータが存在しないため`PlacementTestPage`は「まだ準備されていません」という案内を表示する
+- [x] プレースメントテスト受験フロー実装 — `PlacementTestPage.tsx`。**発音・ロールプレイ形式の問題はAzure Pronunciation Assessment連携が未実装のため採点対象外(分母に含めない)とし、UIには「準備中」の案内のみ表示する**(Phase 7で対応。ユーザー承認済みの方針、SPEC §8参照)。選択式・記述式・並び替え・誤り指摘の4形式は`QuestionAnswerInput`コンポーネントで解答→自動採点まで動作する
+- [x] プレースメントテスト結果からの初期レベル自動判定(正答率の固定閾値、staffが調整可能な設定値)— `lib/levelEvaluation.ts`の`determineInitialLevel`。閾値は`lib/levelSettings.ts`(Firestore `settings/levelThresholds`)から取得し、未設定時はSPEC記載の例値(80%/40%)をデフォルトとする
+- [x] レベル自動昇降級ロジックの実装: 直近N問の正答率+ヒステリシス — `lib/levelEvaluation.ts`の`evaluatePromotionDemotion`として純粋関数を実装済み。**ただしこの関数はまだどこからも呼び出されていない**。直近の解答履歴(`answerLogs`)は通常の問題演習(Phase 5、未実装)を通じて蓄積される想定のため、Phase 5で演習UIを実装する際にこの関数を呼び出す配線を行うこと
+- [x] 閾値(昇級ライン・降級ライン・N値)をstaffが管理画面から調整できる設定項目として実装 — `LevelSettingsPage.tsx`(`/staff/level-settings`)。プレースメントテスト用の閾値も同じ画面で一元管理する
+- [x] レベル変更の履歴記録 — `levelChanges/{changeId}`にプレースメントテスト提出時に記録(`lib/placementTest.ts`)。自前サーバーを持たない構成のため、判定・書き込みは生徒本人のブラウザから直接行う(Firestoreルールで本人のstudentUidでのcreateのみ許可、update/deleteはstaff限定)。履歴の閲覧UIはPhase 8(進捗ダッシュボード)で実装する
+- [ ] **実機での動作確認は未実施**。Firebase未接続のため、Playwrightで`LevelSettingsPage`のレイアウトと、`QuestionAnswerInput`の3形式(選択式・並び替え・誤り指摘)の解答UIが正しく動作すること(並び替えで正しい順序を組み立てられる等)のみ確認した。実際のプレースメントテスト受験(Firestoreへの書き込み・レベル反映・`RequirePlacementTest`ガード解除)は接続後に確認が必要
 
 ## Phase 5: 学習機能 — 問題演習
 
@@ -124,4 +125,5 @@ SPEC.md の内容を実装可能な単位に分解したタスクリスト。フ
 ## 依存関係の要点
 - Phase 1(認証・承認)が完了しないと、Phase 4以降の生徒向け機能はテストできない。
 - Phase 3(コンテンツ管理)がないと、Phase 5〜7の学習機能は表示するコンテンツが存在しない。
-- Phase 4(プレースメントテスト・レベル判定)はPhase 3のコース/レベルマスタに依存する。プレースメントテストは発音問題を含むため、Phase 7.1(Azure Pronunciation Assessment連携)の一部を先行実装する必要がある。
+- Phase 4(プレースメントテスト・レベル判定)はPhase 3のコース/レベルマスタに依存する。プレースメントテストは発音問題を含むため本来はPhase 7.1(Azure Pronunciation Assessment連携)の一部を先行実装する必要があるが、実装時のユーザー判断により、発音・ロールプレイ形式を採点対象外として除外する形でPhase 7.1を待たずに受験フロー自体は実装済み。Phase 7.1実装後、発音問題も採点対象に含めるよう`lib/questionScoring.ts`の`isScorable`を拡張する必要がある。
+- Phase 4で実装したレベル自動昇降級ロジック(`lib/levelEvaluation.ts`の`evaluatePromotionDemotion`)は、Phase 5(問題演習UI)が解答履歴(`answerLogs`)を蓄積するようになって初めて実際に機能する。Phase 5実装時にこの関数の呼び出し配線を追加すること。

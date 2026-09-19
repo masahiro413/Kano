@@ -35,6 +35,9 @@ export function AppLayout() {
                 <Button component={RouterLink} to="/staff/content">
                   {t('nav.content')}
                 </Button>
+                <Button component={RouterLink} to="/staff/level-settings">
+                  {t('nav.levelSettings')}
+                </Button>
                 <Button component={RouterLink} to="/staff/create-account">
                   {t('nav.createStaffAccount')}
                 </Button>

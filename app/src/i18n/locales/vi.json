@@ -36,7 +36,20 @@
   },
   "placementTest": {
     "title": "Bài kiểm tra xếp lớp",
-    "comingSoon": "Tính năng này đang được chuẩn bị. Vui lòng chờ trong giây lát."
+    "comingSoon": "Tính năng này đang được chuẩn bị. Vui lòng chờ trong giây lát.",
+    "instruction": "Vui lòng trả lời tất cả các câu hỏi trước khi nộp bài. Các câu hỏi phát âm/nhập vai hiện chưa được chấm điểm vì đang trong quá trình chuẩn bị.",
+    "notReady": "Bài kiểm tra xếp lớp cho khóa học của bạn chưa được chuẩn bị. Vui lòng liên hệ giáo viên/quản trị viên.",
+    "answeredCount": "Đã trả lời: {{answered}} / {{total}} câu",
+    "submit": "Nộp bài",
+    "resultTitle": "Kết quả",
+    "resultLevel": "Trình độ của bạn được xếp là \"{{level}}\"",
+    "goToLearning": "Đi đến trang học tập"
+  },
+  "questionAnswer": {
+    "reorderInstruction": "Nhấp vào các phần theo đúng thứ tự",
+    "yourOrder": "Thứ tự hiện tại",
+    "reset": "Làm lại",
+    "voiceNotYetSupported": "Câu hỏi này chưa được chấm điểm vì tính năng âm thanh đang được chuẩn bị"
   },
   "tasks": {
     "title": "Quản lý công việc",
@@ -146,6 +159,15 @@
       "roleplayTurns": "Lời thoại nhập vai",
       "studentSpeaks": "Học viên phát âm",
       "deleteConfirmTitle": "Bạn có chắc muốn xóa câu hỏi này?"
+    },
+    "levelSettings": {
+      "title": "Cài đặt xếp trình độ",
+      "placementAdvancedMin": "Bài kiểm tra xếp lớp: ngưỡng tỷ lệ đúng cho trình độ Cao cấp (%)",
+      "placementIntermediateMin": "Bài kiểm tra xếp lớp: ngưỡng tỷ lệ đúng cho trình độ Trung cấp (%)",
+      "promotionThreshold": "Ngưỡng tỷ lệ đúng để lên trình độ (%, vượt quá mức này thì lên trình độ)",
+      "demotionThreshold": "Ngưỡng tỷ lệ đúng để xuống trình độ (%, dưới mức này thì xuống trình độ)",
+      "recentQuestionCount": "Số câu hỏi gần nhất dùng để xét lên/xuống trình độ",
+      "saved": "Đã lưu cài đặt"
     }
   },
   "nav": {
@@ -154,6 +176,7 @@
     "learning": "Học tập",
     "approvals": "Danh sách chờ phê duyệt",
     "content": "Quản lý nội dung",
+    "levelSettings": "Cài đặt trình độ",
     "createStaffAccount": "Tạo nhân viên"
   }
 }
