@@ -12,6 +12,7 @@ import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { QuestionAnswer } from '../lib/questionScoring'
 import type { Question } from '../types/firestore'
+import { PronunciationRecorder } from './PronunciationRecorder'
 
 function shuffle<T>(items: T[]): T[] {
   const result = [...items]
@@ -134,6 +135,16 @@ export function QuestionAnswerInput({
       )
 
     case 'pronunciation':
+      return (
+        <Stack spacing={1}>
+          <Typography variant="subtitle2">{question.targetText}</Typography>
+          <PronunciationRecorder />
+          <Typography color="text.secondary" variant="body2">
+            {t('questionAnswer.pronunciationScoringNotYetSupported')}
+          </Typography>
+        </Stack>
+      )
+
     case 'roleplay':
       return (
         <Box>

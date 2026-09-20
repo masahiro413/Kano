@@ -88,11 +88,12 @@ SPEC.md の内容を実装可能な単位に分解したタスクリスト。フ
 ## Phase 7: 学習機能 — 発音練習
 
 ### 7.1 基本実装(Azure素点)
-- [ ] Azure AI Speech SDK連携(Pronunciation Assessment、`Granularity: Phoneme`で音素単位の差分を取得)
-- [ ] マイク録音UI(ブラウザ音声入力)
-- [ ] 発音採点結果の表示(正確性・流暢さ・完全性のスコア表示)
-- [ ] 発音履歴の記録
-- [ ] APIコスト・利用回数のモニタリング機構(制限は実装しないが、呼び出し箇所を一元化しFirestoreにログを残す — SPEC §4.5)
+- [ ] **Azure AI Speech SDK連携は未着手(ユーザー承認済みの方針でUIのみ先行実装)**。Azureの購読キーはクライアントに直接置けず(TTS自動生成・Anamと同じ理由)、Cloud Functions等のサーバーレス関数でトークンを発行する実装が必要。このプロジェクトはこれまで自前サーバーを一切持たない構成で進めてきたため、Cloud Functions導入は大きな決断であり、着手前に改めてユーザーに確認すること。`lib/pronunciationAssessment.ts`に将来の呼び出し口(`assessPronunciation`)を用意済みだが、現状は呼び出すと例外を投げるだけ
+- [x] マイク録音UI(ブラウザ音声入力)— `components/PronunciationRecorder.tsx`。`MediaRecorder`/`getUserMedia`で録音→停止→ブラウザ内再生確認までを実装(録音データはどこにも送信・保存しない)。`QuestionAnswerInput`の`pronunciation`形式に組み込み、問題演習・プレースメントテストの両方で発音問題が表示された際に使える
+- [ ] 発音採点結果の表示(正確性・流暢さ・完全性のスコア表示)— Azure連携が前提のため未着手。UIには代わりに「自動採点機能は準備中」の案内を表示している
+- [ ] 発音履歴の記録 — 実際のAzureスコアが存在しないため、実データを持たない履歴を作ることは避けた(捏造データを残さない方針)。Azure連携実装後に着手する
+- [x] APIコスト・利用回数のモニタリング機構の一元化ポイントのみ先行実装 — `lib/pronunciationAssessment.ts`を将来の唯一の呼び出し口として用意(CLAUDE.mdの「呼び出し箇所は一箇所にまとめておく」方針)。実際のログ記録・制限ロジックはAzure連携実装時に追加する
+- [ ] **実機での動作確認**: Playwrightで実際のブラウザのMediaRecorder API(`--use-fake-device-for-media-stream`)を使い、録音開始→停止→再生UIの一連の流れが正しく動作することを確認済み(フェイクデバイスのため無音・0秒扱いだが、状態遷移とUI表示は検証できた)
 
 ### 7.2 南部(サイゴン)方言許容ロジック(SPEC §4.5)
 - [ ] 語頭子音の南部方言許容ルール(s-→[s-]、v-/d-/gi-→[j-])を、優先一次資料(SPEC §4.5.4-c、Hà Nội⇔Sài Gòn直接比較)から構造化データ化する

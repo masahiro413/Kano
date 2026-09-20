@@ -49,7 +49,15 @@
     "reorderInstruction": "正しい順番になるようにピースをクリックしてください",
     "yourOrder": "現在の順番",
     "reset": "やり直す",
-    "voiceNotYetSupported": "この問題は音声機能が準備中のため、現在は採点対象外です"
+    "voiceNotYetSupported": "この問題は音声機能が準備中のため、現在は採点対象外です",
+    "pronunciationScoringNotYetSupported": "録音して自分の発音を確認できますが、自動採点機能は現在準備中です"
+  },
+  "pronunciation": {
+    "record": "録音を開始",
+    "stop": "録音を停止",
+    "recording": "録音中...",
+    "reRecord": "録音をやり直す",
+    "micError": "マイクを利用できませんでした。ブラウザのマイク許可設定をご確認ください。"
   },
   "learning": {
     "empty": "現在のコース・レベルで利用できる問題集はまだありません",

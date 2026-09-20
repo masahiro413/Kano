@@ -49,7 +49,15 @@
     "reorderInstruction": "Nhấp vào các phần theo đúng thứ tự",
     "yourOrder": "Thứ tự hiện tại",
     "reset": "Làm lại",
-    "voiceNotYetSupported": "Câu hỏi này chưa được chấm điểm vì tính năng âm thanh đang được chuẩn bị"
+    "voiceNotYetSupported": "Câu hỏi này chưa được chấm điểm vì tính năng âm thanh đang được chuẩn bị",
+    "pronunciationScoringNotYetSupported": "Bạn có thể ghi âm để nghe lại phát âm của mình, nhưng tính năng chấm điểm tự động vẫn đang được chuẩn bị"
+  },
+  "pronunciation": {
+    "record": "Bắt đầu ghi âm",
+    "stop": "Dừng ghi âm",
+    "recording": "Đang ghi âm...",
+    "reRecord": "Ghi âm lại",
+    "micError": "Không thể sử dụng micro. Vui lòng kiểm tra quyền truy cập micro trong trình duyệt."
   },
   "learning": {
     "empty": "Hiện chưa có bộ câu hỏi nào cho khóa học/trình độ của bạn",
