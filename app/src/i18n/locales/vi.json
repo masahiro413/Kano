@@ -84,6 +84,19 @@
     "levelChanged": "Trình độ của bạn đã thay đổi thành \"{{level}}\"",
     "backToLearning": "Quay lại trang học tập"
   },
+  "progress": {
+    "overallAccuracy": "Tỷ lệ trả lời đúng tổng thể",
+    "answeredCount": "Số câu đã trả lời: {{count}}",
+    "answeredCountHeader": "Số câu đã trả lời",
+    "vocabLearned": "Từ vựng đã học",
+    "vocabDueToday": "Cần ôn tập hôm nay",
+    "recentAnswers": "Kết quả trả lời gần đây",
+    "accuracyByFormat": "Tỷ lệ đúng theo hình thức câu hỏi",
+    "formatStats": "{{percent}}% ({{correct}}/{{total}} câu)",
+    "levelHistory": "Lịch sử thay đổi trình độ",
+    "studentName": "Họ và tên",
+    "noStudents": "Hiện chưa có học viên nào được phê duyệt"
+  },
   "tasks": {
     "title": "Quản lý công việc",
     "newTaskPlaceholder": "Nhập công việc mới",

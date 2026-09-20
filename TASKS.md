@@ -114,9 +114,11 @@ SPEC.md の内容を実装可能な単位に分解したタスクリスト。フ
 
 ## Phase 8: 進捗ダッシュボード
 
-- [ ] 生徒個人向け:自分の学習履歴・スコア推移画面
-- [ ] staff向け:全生徒の進捗一覧ダッシュボード
-- [ ] 集計ロジック(正答率、発音スコア平均などの算出)
+- [x] 生徒個人向け:自分の学習履歴・スコア推移画面 — `StudentDashboardPage.tsx`("/"のホーム画面)。全体正答率・出題形式別正答率・直近10件の解答結果(○×表示)・単語帳の学習状況(学習済み枚数/本日の復習対象)・レベル変更履歴を表示する
+- [x] staff向け:全生徒の進捗一覧ダッシュボード — `StaffDashboardPage.tsx`("/"のホーム画面)。承認済み生徒ごとに氏名・コース・レベル・解答数・正答率・単語帳の学習状況を一覧表示する
+- [x] 集計ロジック(正答率などの算出)— `lib/progressStats.ts`に`computeAccuracy`/`groupAccuracyByFormat`/`groupLogsByStudent`/`computeVocabStats`/`formatDate`を実装。**発音スコアの平均算出は対象外**(Phase 7.1でAzure連携自体を見送ったため、集計すべき実データが存在しない。捏造データを表示しない方針は他フェーズと同様)
+- [x] `answerLogs`/`levelChanges`ともに、生徒本人のクエリ用複合インデックス(`studentUid ASC, createdAt DESC`)を追加
+- [ ] **実機での動作確認は未実施**。Firebase未接続のため、Playwrightで(a)未ログイン状態での空表示(クラッシュしないこと)と、(b)モックデータを`lib/progressStats.ts`の実関数に通した計算結果(正答率・出題形式別内訳・単語帳学習状況・レベル変更履歴の日付表示)が期待通りであることを確認した。実際のFirestoreデータでの表示は接続後に確認が必要
 
 ## Phase 9: 仕上げ・QA
 

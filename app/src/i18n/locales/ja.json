@@ -84,6 +84,19 @@
     "levelChanged": "レベルが「{{level}}」に変更されました",
     "backToLearning": "学習画面へ戻る"
   },
+  "progress": {
+    "overallAccuracy": "全体の正答率",
+    "answeredCount": "解答数: {{count}}問",
+    "answeredCountHeader": "解答数",
+    "vocabLearned": "学習済みの単語",
+    "vocabDueToday": "本日の復習対象",
+    "recentAnswers": "直近の解答結果",
+    "accuracyByFormat": "出題形式別の正答率",
+    "formatStats": "{{percent}}%({{correct}}/{{total}}問)",
+    "levelHistory": "レベル変更履歴",
+    "studentName": "氏名",
+    "noStudents": "承認済みの生徒はまだいません"
+  },
   "tasks": {
     "title": "タスク管理",
     "newTaskPlaceholder": "新しいタスクを入力",
