@@ -289,14 +289,14 @@ export function QuestionEditorDialog({
               </Typography>
               <Stack spacing={1}>
                 {form.dialogueTurns.map((turn, index) => (
-                  <Stack key={index} direction="row" spacing={1}>
+                  <Stack key={index} direction={{ xs: 'column', sm: 'row' }} spacing={1}>
                     <TextField
                       label={t('staff.questions.speaker')}
                       value={turn.speaker}
                       onChange={(e) =>
                         updateDialogueTurn(index, { ...turn, speaker: e.target.value })
                       }
-                      sx={{ width: 120 }}
+                      sx={{ width: { xs: '100%', sm: 120 } }}
                     />
                     <TextField
                       label={t('staff.questions.text')}
@@ -414,9 +414,9 @@ export function QuestionEditorDialog({
                   {form.turns.map((turn, index) => (
                     <Stack
                       key={index}
-                      direction="row"
+                      direction={{ xs: 'column', sm: 'row' }}
                       spacing={1}
-                      sx={{ alignItems: 'center' }}
+                      sx={{ alignItems: { xs: 'stretch', sm: 'center' } }}
                     >
                       <TextField
                         label={t('staff.questions.speaker')}
@@ -424,7 +424,7 @@ export function QuestionEditorDialog({
                         onChange={(e) =>
                           updateRoleplayTurn(index, { ...turn, speaker: e.target.value })
                         }
-                        sx={{ width: 120 }}
+                        sx={{ width: { xs: '100%', sm: 120 } }}
                       />
                       <TextField
                         label={t('staff.questions.text')}

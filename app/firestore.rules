@@ -16,19 +16,43 @@ service cloud.firestore {
       return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
     }
 
+    // 自分自身のusersドキュメントがまだ存在しない場合(生徒の自己登録の瞬間など)、
+    // get().dataへのアクセスは評価エラーになる(Firestoreルールの既知の挙動)。
+    // isStaff()はあらゆる箇所から呼ばれるため、exists()で事前に存在確認してから
+    // get()するガードをこの関数自体に持たせ、呼び出し順序に依存せず常に安全に
+    // falseへフォールバックできるようにする。
     function isStaff() {
-      return isSignedIn() && myProfile().role == 'staff';
+      return isSignedIn() &&
+        exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+        myProfile().role == 'staff';
     }
 
     // users/{uid} — 本人は自分のプロフィールを読み書きできる。
     // staffは新規staffアカウント発行(SPEC §2.3)のため他uidのドキュメントも作成でき、
     // 承認/拒否(SPEC §2.2)のため更新もできる。
-    // フィールド単位の細かい制御(生徒がrole/approvalStatus/levelを自分で書き換え
-    // られないようにする等)はPhase 1の実装後、Phase 9で網羅的にテストし詳細化する。
+    // フィールド単位の制御(Phase 9で網羅的にテストし詳細化): 生徒が自分自身の
+    // role・approvalStatusを書き換えて自己承認・staffへの権限昇格をすることを防ぐ。
+    // 一方でlevel・placementTestCompletedは、自前サーバーを持たない構成のため
+    // 本人のブラウザから直接書き込む必要がある(プレースメントテスト・自動昇降級、
+    // SPEC §4.2)。そのため「role/approvalStatusが変化しない更新」のみ本人に許可し、
+    // それ以外のフィールドの自己更新は許可する設計とした。
     match /users/{uid} {
       allow read: if isOwner(uid) || isStaff();
-      allow create: if isOwner(uid) || isStaff();
-      allow update: if isOwner(uid) || isStaff();
+
+      // isOwnerの自己登録分岐を先に評価する: 新規登録時は自分のusersドキュメントが
+      // まだ存在しないため、先にisStaff()を評価するとget()が存在しないドキュメントを
+      // 参照して評価エラーになる(Firestoreルールのget()は対象が存在しないと
+      // .dataへのアクセスで例外になる)。isOwner側の条件はget()を使わないため、
+      // 短絡評価でisStaff()に到達しない順序にする必要がある。
+      allow create: if (isOwner(uid) &&
+          request.resource.data.role == 'student' &&
+          request.resource.data.approvalStatus == 'pending') ||
+        isStaff();
+
+      allow update: if (isOwner(uid) &&
+          request.resource.data.role == resource.data.role &&
+          request.resource.data.approvalStatus == resource.data.approvalStatus) ||
+        isStaff();
     }
 
     // tasks/{taskId} — 所有者(ownerUid)のみread/write可能。共有タスク一覧は存在しない(SPEC §3)。

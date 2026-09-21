@@ -122,11 +122,14 @@ SPEC.md の内容を実装可能な単位に分解したタスクリスト。フ
 
 ## Phase 9: 仕上げ・QA
 
-- [ ] レスポンシブ対応の全画面確認(PC/スマホ)
-- [ ] i18n完全対応の確認(日本語/ベトナム語で全画面を確認)
-- [ ] Firestoreセキュリティルールの網羅的テスト(ロール越境アクセスができないことの確認)
-- [ ] 主要ユーザーフローのE2E確認(生徒登録→承認→プレースメントテスト→学習、タスク管理一連の操作)
-- [ ] 外部APIコスト実測とレート制限要否の最終判断
+- [x] Firestoreセキュリティルールの網羅的テスト(ロール越境アクセスができないことの確認)— `tests/firestore.rules.test.ts`(`@firebase/rules-unit-testing` + vitest + Firestoreエミュレータ)で35件のテストを実装し全件成功を確認済み。`users`/`tasks`/`courses`/`levelChanges`/`answerLogs`/`settings`/`pronunciationApiUsageLogs`/`vocabCards`/`listeningMaterials`/`questionSets`(+`questions`サブコレクション)/`vocabReviews`の全コレクションについて、所有者境界・ロール境界・改ざん防止(update/delete不可なコレクション)をカバーした。
+  - **実装中に実際のセキュリティ上の穴を発見・修正した**: `users/{uid}`は元々「本人は自分のドキュメントを自由に読み書きできる」というルールだったため、生徒が自分自身の`role`を`'staff'`に書き換えて権限昇格したり、`approvalStatus`を`'approved'`に書き換えて自己承認したりできてしまう欠陥があった(CLAUDE.mdの承認制の要件に反する)。`role`/`approvalStatus`が変化しない更新のみ本人に許可し、それ以外(`level`等、本人のブラウザから直接書き込む必要があるフィールド)は引き続き許可する形に修正した。
+  - 修正の過程で、Firestoreルールの既知の挙動(`get()`で存在しないドキュメントの`.data`にアクセスすると評価エラーになる)にも遭遇し、`isStaff()`に`exists()`ガードを追加して恒久対応した。
+  - 実行方法: `npm run emulators`でエミュレータを起動した状態で別ターミナルから`FIRESTORE_EMULATOR_HOST=localhost:8080 npm run test:rules`
+- [x] レスポンシブ対応の全画面確認(PC/スマホ)— Playwrightで主要画面を375px/320px幅で確認。**2件の実バグを発見・修正した**: (1) `AppLayout`のナビゲーションが特にstaffロールで項目数が多い場合にモバイル幅で画面外にはみ出す(横スクロールが発生する)問題 → `Stack`に`flexWrap: 'wrap'`を追加して修正。(2) `QuestionEditorDialog`の会話文脈・ロールプレイ発言の入力行(話者+発言内容+チェックボックス+削除ボタン)が、モバイル幅では「話者」ラベルが途中で切れ「生徒が発話する」チェックボックスのラベルが1文字ずつ縦に折り返される問題 → `direction={{ xs: 'column', sm: 'row' }}`に変更して解決
+- [x] i18n完全対応の確認(日本語/ベトナム語で全画面を確認)— 静的解析でja.json/vi.jsonの全キーを比較し、両ファイルとも174キーで完全一致(片方にしかないキーはゼロ)であることを確認した。コード内で使用されている`t()`呼び出しのキー(動的キー`staff.levels.*`/`staff.questions.formats.*`/`tasks.priority.*`を含む)もすべて両ファイルに存在することを確認済み。実際のブラウザでの全画面目視確認(文字送りの崩れ等)は未実施
+- [ ] 主要ユーザーフローのE2E確認(生徒登録→承認→プレースメントテスト→学習、タスク管理一連の操作)— **実Firebaseプロジェクトが必要なため未実施**。Firestoreエミュレータ上でのE2E確認は今回のスコープ外としたが、`tests/`ディレクトリとエミュレータ環境は整っているため、今後追加しやすい
+- [ ] 外部APIコスト実測とレート制限要否の最終判断 — **実施不可**。Azure/Anam等の外部API連携自体が未着手(Phase 7.1、SPEC §8参照)のため、実測対象のAPI呼び出しが存在しない
 
 ---
 

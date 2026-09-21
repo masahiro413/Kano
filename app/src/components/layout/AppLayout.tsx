@@ -17,7 +17,7 @@ export function AppLayout() {
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             {t('common.appName')}
           </Typography>
-          <Stack direction="row" spacing={1}>
+          <Stack direction="row" spacing={1} sx={{ flexWrap: 'wrap', rowGap: 1 }}>
             <Button component={RouterLink} to="/">
               {t('nav.dashboard')}
             </Button>
@@ -44,7 +44,7 @@ export function AppLayout() {
               </>
             )}
           </Stack>
-          <Stack direction="row" spacing={1}>
+          <Stack direction="row" spacing={1} sx={{ flexWrap: 'wrap', rowGap: 1 }}>
             <Button size="small" onClick={() => i18n.changeLanguage('ja')}>
               日本語
             </Button>
