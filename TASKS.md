@@ -10,7 +10,7 @@ SPEC.md の内容を実装可能な単位に分解したタスクリスト。フ
 - [x] フロントエンド雛形構築(React + TypeScript + Vite)— `app/`に構築済み
 - [x] ルーティング設計(生徒/staffで表示を分岐するルート構成)— 基本構造のみ。承認待ち・staff専用エリアのガードも実装済み(`app/src/App.tsx`, `app/src/components/guards/`)
 - [x] i18n基盤導入(日本語/ベトナム語切り替え。react-i18next等)— 基本語彙のみ登録済み、画面追加時に随時拡充する
-- [ ] レスポンシブレイアウトの基本方針・ブレークポイント設計 — MUIのデフォルトに依存している状態。明示的な方針は未検討
+- [x] レスポンシブレイアウトの基本方針・ブレークポイント設計 — SPEC.md §7に明文化。MUIデフォルトのブレークポイントをそのまま採用し、320px/375pxで横スクロールが出ないことを確認する方針とした。Phase 9で発見した2件の実バグ(ナビゲーション・問題編集フォームの横はみ出し)もこの方針に沿って修正済み
 - [x] Firestoreデータモデル設計(コレクション構造の確定。SPEC §6.2をベースに詳細化)— users/tasks/courses/levelChanges/pronunciationApiUsageLogsに加え、Phase 3で問題集・単語帳・リスニング教材(questionSets/vocabCards/listeningMaterials)の型も`app/src/types/firestore.ts`に定義済み
 - [x] Firestoreセキュリティルールの初版作成(ロール・所有者ベースのアクセス制御)— `app/firestore.rules`に初版ドラフトあり。コンテンツ系コレクション追加時・Phase 9で拡充する
 - [x] CI/Lint/Format設定(将来の引き継ぎを見据えた最低限の品質担保)— ESLint + Prettier導入済み(`npm run lint` / `npm run format`)。GitHub Actions等のCIパイプライン自体は未構築
